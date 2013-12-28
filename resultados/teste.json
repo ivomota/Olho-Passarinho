@@ -1,0 +1,385 @@
+{
+    "_id": ObjectId("52b24b2f8ef20d397ecbacc6"),
+    "filter_level": "medium",
+    "retweeted": false,
+    "in_reply_to_screen_name": null,
+    "possibly_sensitive": false,
+    "truncated": false,
+    "lang": "es",
+    "in_reply_to_status_id_str": null,
+    "id": NumberLong("359201265193984001"),
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_status_id": null,
+    "created_at": "Mon Jul 22 06:40:29 +0000 2013",
+    "favorite_count": 0,
+    "place": null,
+    "coordinates": null,
+    "text": "RT @JaredLeto: Yesterday - #MARSinPORTUGAL!! http://t.co/6nHeSDP7jP",
+    "contributors": null,
+    "retweeted_status": {
+        "contributors": null,
+        "text": "Yesterday - #MARSinPORTUGAL!! http://t.co/6nHeSDP7jP",
+        "geo": null,
+        "retweeted": false,
+        "in_reply_to_screen_name": null,
+        "possibly_sensitive": false,
+        "truncated": false,
+        "lang": "es",
+        "entities": {
+            "symbols": [
+                
+            ],
+            "urls": [
+                {
+                    "expanded_url": "http://instagram.com/p/cArtR4APro/",
+                    "indices": [
+                        30,
+                        52
+                    ],
+                    "display_url": "instagram.com/p/cArtR4APro/",
+                    "url": "http://t.co/6nHeSDP7jP"
+                }
+            ],
+            "hashtags": [
+                {
+                    "text": "MARSinPORTUGAL",
+                    "indices": [
+                        12,
+                        27
+                    ]
+                }
+            ],
+            "user_mentions": [
+                
+            ]
+        },
+        "in_reply_to_status_id_str": null,
+        "id": NumberLong("359132049967288322"),
+        "source": "<a href=\"http://www.hootsuite.com\" rel=\"nofollow\">HootSuite</a>",
+        "in_reply_to_user_id_str": null,
+        "favorited": false,
+        "in_reply_to_status_id": null,
+        "retweet_count": 155,
+        "created_at": "Mon Jul 22 02:05:27 +0000 2013",
+        "in_reply_to_user_id": null,
+        "favorite_count": 125,
+        "id_str": "359132049967288322",
+        "place": null,
+        "user": {
+            "location": "@CREEPS",
+            "default_profile": false,
+            "statuses_count": 14534,
+            "profile_background_tile": false,
+            "lang": "en",
+            "profile_link_color": "757575",
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/27711339/1367515772",
+            "id": 27711339,
+            "following": null,
+            "favourites_count": 11,
+            "protected": false,
+            "profile_text_color": "333333",
+            "description": "Purchase + Download LOVE LUST FAITH + DREAMS now! http://smarturl.it/LLFD",
+            "verified": true,
+            "contributors_enabled": false,
+            "profile_sidebar_border_color": "BDDCAD",
+            "name": "JARED LETO",
+            "profile_background_color": "FFFFFF",
+            "created_at": "Mon Mar 30 19:40:51 +0000 2009",
+            "default_profile_image": false,
+            "followers_count": 1083183,
+            "profile_image_url_https": "https://si0.twimg.com/profile_images/3600455287/cc2977f764d539e3a7afd717f01d5056_normal.jpeg",
+            "geo_enabled": false,
+            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/26324718/Great_White_Shark__South_Africa.jpg",
+            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/26324718/Great_White_Shark__South_Africa.jpg",
+            "follow_request_sent": null,
+            "url": "http://jaredleto.com",
+            "utc_offset": -28800,
+            "time_zone": "Pacific Time (US & Canada)",
+            "notifications": null,
+            "profile_use_background_image": false,
+            "friends_count": 100,
+            "profile_sidebar_fill_color": "DDFFCC",
+            "screen_name": "JaredLeto",
+            "id_str": "27711339",
+            "profile_image_url": "http://a0.twimg.com/profile_images/3600455287/cc2977f764d539e3a7afd717f01d5056_normal.jpeg",
+            "listed_count": 16871,
+            "is_translator": false
+        },
+        "coordinates": null
+    },
+    "geo": null,
+    "entities": {
+        "symbols": [
+            
+        ],
+        "urls": [
+            {
+                "expanded_url": "http://instagram.com/p/cArtR4APro/",
+                "indices": [
+                    45,
+                    67
+                ],
+                "display_url": "instagram.com/p/cArtR4APro/",
+                "url": "http://t.co/6nHeSDP7jP"
+            }
+        ],
+        "hashtags": [
+            {
+                "text": "MARSinPORTUGAL",
+                "indices": [
+                    27,
+                    42
+                ]
+            }
+        ],
+        "user_mentions": [
+            {
+                "id": 27711339,
+                "name": "JARED LETO",
+                "indices": [
+                    3,
+                    13
+                ],
+                "screen_name": "JaredLeto",
+                "id_str": "27711339"
+            }
+        ]
+    },
+    "source": "web",
+    "favorited": false,
+    "in_reply_to_user_id": null,
+    "retweet_count": 0,
+    "id_str": "359201265193984001",
+    "user": {
+        "location": "Portugal",
+        "default_profile": false,
+        "statuses_count": 500,
+        "profile_background_tile": true,
+        "lang": "en",
+        "profile_link_color": "00658A",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/134906960/1353608080",
+        "id": 134906960,
+        "following": null,
+        "favourites_count": 1986,
+        "protected": false,
+        "profile_text_color": "0A0A0A",
+        "description": "A student that loves youtube and stuff. ^^",
+        "verified": false,
+        "contributors_enabled": false,
+        "profile_sidebar_border_color": "FFFFFF",
+        "name": "Ana Moreira",
+        "profile_background_color": "F75408",
+        "created_at": "Mon Apr 19 20:07:59 +0000 2010",
+        "default_profile_image": false,
+        "followers_count": 24,
+        "profile_image_url_https": "https://si0.twimg.com/profile_images/2882374645/714f45b7a154d83a60d4d067654f5098_normal.jpeg",
+        "geo_enabled": true,
+        "profile_background_image_url": "http://a0.twimg.com/profile_background_images/99242450/final12.jpg",
+        "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/99242450/final12.jpg",
+        "follow_request_sent": null,
+        "url": "http://cherrytomato-shutdown.tumblr.com/",
+        "utc_offset": 0,
+        "time_zone": "Lisbon",
+        "notifications": null,
+        "profile_use_background_image": true,
+        "friends_count": 163,
+        "profile_sidebar_fill_color": "F74808",
+        "screen_name": "Ana_Moreira_",
+        "id_str": "134906960",
+        "profile_image_url": "http://a0.twimg.com/profile_images/2882374645/714f45b7a154d83a60d4d067654f5098_normal.jpeg",
+        "listed_count": 0,
+        "is_translator": false
+    }
+},
+{
+    "_id": ObjectId("52b24b2f8ef20d397ecbad1b"),
+    "filter_level": "medium",
+    "retweeted": false,
+    "in_reply_to_screen_name": null,
+    "possibly_sensitive": false,
+    "truncated": false,
+    "lang": "es",
+    "in_reply_to_status_id_str": null,
+    "id": NumberLong("359202573091225601"),
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_status_id": null,
+    "created_at": "Mon Jul 22 06:45:41 +0000 2013",
+    "favorite_count": 0,
+    "place": null,
+    "coordinates": null,
+    "text": "RT @JaredLeto: Yesterday - #MARSinPORTUGAL!! http://t.co/6nHeSDP7jP",
+    "contributors": null,
+    "retweeted_status": {
+        "contributors": null,
+        "text": "Yesterday - #MARSinPORTUGAL!! http://t.co/6nHeSDP7jP",
+        "geo": null,
+        "retweeted": false,
+        "in_reply_to_screen_name": null,
+        "possibly_sensitive": false,
+        "truncated": false,
+        "lang": "es",
+        "entities": {
+            "symbols": [
+                
+            ],
+            "urls": [
+                {
+                    "expanded_url": "http://instagram.com/p/cArtR4APro/",
+                    "indices": [
+                        30,
+                        52
+                    ],
+                    "display_url": "instagram.com/p/cArtR4APro/",
+                    "url": "http://t.co/6nHeSDP7jP"
+                }
+            ],
+            "hashtags": [
+                {
+                    "text": "MARSinPORTUGAL",
+                    "indices": [
+                        12,
+                        27
+                    ]
+                }
+            ],
+            "user_mentions": [
+                
+            ]
+        },
+        "in_reply_to_status_id_str": null,
+        "id": NumberLong("359132049967288322"),
+        "source": "<a href=\"http://www.hootsuite.com\" rel=\"nofollow\">HootSuite</a>",
+        "in_reply_to_user_id_str": null,
+        "favorited": false,
+        "in_reply_to_status_id": null,
+        "retweet_count": 157,
+        "created_at": "Mon Jul 22 02:05:27 +0000 2013",
+        "in_reply_to_user_id": null,
+        "favorite_count": 129,
+        "id_str": "359132049967288322",
+        "place": null,
+        "user": {
+            "location": "@CREEPS",
+            "default_profile": false,
+            "statuses_count": 14534,
+            "profile_background_tile": false,
+            "lang": "en",
+            "profile_link_color": "757575",
+            "profile_banner_url": "https://pbs.twimg.com/profile_banners/27711339/1367515772",
+            "id": 27711339,
+            "following": null,
+            "favourites_count": 11,
+            "protected": false,
+            "profile_text_color": "333333",
+            "description": "Purchase + Download LOVE LUST FAITH + DREAMS now! http://smarturl.it/LLFD",
+            "verified": true,
+            "contributors_enabled": false,
+            "profile_sidebar_border_color": "BDDCAD",
+            "name": "JARED LETO",
+            "profile_background_color": "FFFFFF",
+            "created_at": "Mon Mar 30 19:40:51 +0000 2009",
+            "default_profile_image": false,
+            "followers_count": 1083181,
+            "profile_image_url_https": "https://si0.twimg.com/profile_images/3600455287/cc2977f764d539e3a7afd717f01d5056_normal.jpeg",
+            "geo_enabled": false,
+            "profile_background_image_url": "http://a0.twimg.com/profile_background_images/26324718/Great_White_Shark__South_Africa.jpg",
+            "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/26324718/Great_White_Shark__South_Africa.jpg",
+            "follow_request_sent": null,
+            "url": "http://jaredleto.com",
+            "utc_offset": -28800,
+            "time_zone": "Pacific Time (US & Canada)",
+            "notifications": null,
+            "profile_use_background_image": false,
+            "friends_count": 100,
+            "profile_sidebar_fill_color": "DDFFCC",
+            "screen_name": "JaredLeto",
+            "id_str": "27711339",
+            "profile_image_url": "http://a0.twimg.com/profile_images/3600455287/cc2977f764d539e3a7afd717f01d5056_normal.jpeg",
+            "listed_count": 16871,
+            "is_translator": false
+        },
+        "coordinates": null
+    },
+    "geo": null,
+    "entities": {
+        "symbols": [
+            
+        ],
+        "urls": [
+            {
+                "expanded_url": "http://instagram.com/p/cArtR4APro/",
+                "indices": [
+                    45,
+                    67
+                ],
+                "display_url": "instagram.com/p/cArtR4APro/",
+                "url": "http://t.co/6nHeSDP7jP"
+            }
+        ],
+        "hashtags": [
+            {
+                "text": "MARSinPORTUGAL",
+                "indices": [
+                    27,
+                    42
+                ]
+            }
+        ],
+        "user_mentions": [
+            {
+                "id": 27711339,
+                "name": "JARED LETO",
+                "indices": [
+                    3,
+                    13
+                ],
+                "screen_name": "JaredLeto",
+                "id_str": "27711339"
+            }
+        ]
+    },
+    "source": "web",
+    "favorited": false,
+    "in_reply_to_user_id": null,
+    "retweet_count": 0,
+    "id_str": "359202573091225601",
+    "user": {
+        "location": "Portugal",
+        "default_profile": false,
+        "statuses_count": 2610,
+        "profile_background_tile": false,
+        "lang": "en",
+        "profile_link_color": "0084B4",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/70951545/1372084869",
+        "id": 70951545,
+        "following": null,
+        "favourites_count": 578,
+        "protected": false,
+        "profile_text_color": "333333",
+        "description": "Life researcher. Music lover. Geek at heart. Always lost in my thoughts...",
+        "verified": false,
+        "contributors_enabled": false,
+        "profile_sidebar_border_color": "000000",
+        "name": "Stéphanie ",
+        "profile_background_color": "022330",
+        "created_at": "Wed Sep 02 12:30:44 +0000 2009",
+        "default_profile_image": false,
+        "followers_count": 82,
+        "profile_image_url_https": "https://si0.twimg.com/profile_images/2907744598/5e57abb044f211092aa84e83f91c8b2e_normal.jpeg",
+        "geo_enabled": false,
+        "profile_background_image_url": "http://a0.twimg.com/profile_background_images/378800000006658325/9d1b678f1c28f1aa923fefb908cf04ec.jpeg",
+        "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/378800000006658325/9d1b678f1c28f1aa923fefb908cf04ec.jpeg",
+        "follow_request_sent": null,
+        "url": null,
+        "utc_offset": 0,
+        "time_zone": "Lisbon",
+        "notifications": null,
+        "profile_use_background_image": true,
+        "friends_count": 204,
+        "profile_sidebar_fill_color": "C0DFEC",
+        "screen_name": "11Stephanie",
+        "id_str": "70951545",
+        "profile_image_url": "http://a0.twimg.com/profile_images/2907744598/5e57abb044f211092aa84e83f91c8b2e_normal.jpeg",
+        "listed_count": 4,
+        "is_translator": false
+    }
