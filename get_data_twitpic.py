@@ -21,8 +21,8 @@ regx = re.compile("^twitpic.com", re.IGNORECASE)
 # f = open('/Applications/MAMP/htdocs/Tese/Results/twitpic_urls_2.txt', 'w')
 f = open('./resultados/twitpic_urls.txt', 'w')
 
-
 data = []
+vetor = []
 twitpic = 0
 # a = {}
 count = 0
@@ -46,22 +46,33 @@ for each in collection.find( {'entities.urls.display_url' : regx}):#, { 'entitie
 
 	m = re.search(r"^[^.]*", URL)
 	site = m.group(0)
-	if site == 'twitpic':
-		try:
-			if chave:
-				f.write(str(ID)+','+URL+', Retweetado, '+ str(ORIGINAL_TWEET) +'\n')
-			else:
-				f.write(str(ID)+','+URL+', NULL\n')
-			twitpic = twitpic + 1 
-		except:
-			pass
+	n = re.search(r"com/(\w+)", URL)
 
-# f_data = json.dumps(f_data, default=json_util.default)
-# f.write(f_data+'\n')
-	count = count + 1
-	if count%1000 == 0:
-		print count
+	try:
+		codigo = n.group(1)
+		if site == 'twitpic':
+			try:
+				if chave:
+					if codigo in vetor:
+						f.write(str(ID)+','+URL+', Retweet, Ignorar\n')
+					else:
+						f.write(str(ID)+','+URL+', Retweet, Primeiro\n')
+						vetor.append(codigo)
+				else:
+					f.write(str(ID)+','+URL+', NULL\n')
+				twitpic = twitpic + 1 
+			except:
+				pass
+
+	# f_data = json.dumps(f_data, default=json_util.default)
+	# f.write(f_data+'\n')
+		count = count + 1
+		if count%1000 == 0:
+			print count
+	except:
+		pass
 
 print "Numero de urls twitpic --> " + str(twitpic)
 print "Numero de retweets --> " + str(ret)
 f.close()
+
