@@ -12,7 +12,7 @@ print 'Starting Script...\n'
 
 client = MongoClient('192.168.102.190')
 print 'Connected to database...\n'
-db = client.socialecho
+db = client.socialecho_br
 collection = db.tweets
 #regx = re.compile("pic|twitpic|flic|instagram", re.IGNORECASE)
 regx = re.compile("^instagram.com", re.IGNORECASE)
@@ -34,7 +34,7 @@ chave = False
 # if each["entities"]["urls"][0]["display_url"].startswith('twitpic.com'):
 # a[each['_id']] = each["entities"]["urls"][0]["display_url"]
     
-for each in collection.find( {'entities.urls.display_url' : regx}, { 'entities.urls.display_url' : 1} ):
+for each in collection.find( {'entities.urls.display_url' : regx}):#, { 'entities.urls.display_url' : 1} ):
 	ID = each["_id"]
 	URL = each["entities"]["urls"][0]["display_url"]
 	try:
@@ -63,6 +63,6 @@ for each in collection.find( {'entities.urls.display_url' : regx}, { 'entities.u
 	if count%1000 == 0:
 		print count
 
-print "Numero de urls twitpic --> " + str(twitpic)
+print "Numero de urls instagram --> " + str(twitpic)
 print "Numero de retweets --> " + str(ret)
 f.close()

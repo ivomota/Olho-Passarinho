@@ -6,11 +6,13 @@ Um extensão do TweeProfiles para fotografia
 
 ### Mongodb Server ####
 
-mongo 192.168.102.190/socialecho
+*  mongo 192.168.102.190/socialecho
+** mongo 192.168.102.190/socialecho_br
 
 collection tweets
 
-Nota --> Esta coleção é com os tweets portugueses de Portugal
+Nota 	--> * Esta coleção é com os tweets portugueses de Portugal
+		--> ** Esta coleção é com os tweets portugueses do Brasil
 
 
 ### INFO ####
