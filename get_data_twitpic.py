@@ -50,16 +50,17 @@ for each in collection.find( {'entities.urls.display_url' : regx}):#, { 'entitie
 
 	try:
 		codigo = n.group(1)
+		print codigo
 		if site == 'twitpic':
 			try:
 				if chave:
 					if codigo in vetor:
-						f.write(str(ID)+','+URL+', Retweet, Ignorar\n')
+						f.write(str(ID)+','+URL+', Retweet, NULL\n')
 					else:
 						f.write(str(ID)+','+URL+', Retweet, Primeiro\n')
 						vetor.append(codigo)
 				else:
-					f.write(str(ID)+','+URL+', NULL\n')
+					f.write(str(ID)+','+URL+', Original\n, NULL')
 				twitpic = twitpic + 1 
 			except:
 				pass
