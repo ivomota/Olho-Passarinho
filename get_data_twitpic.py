@@ -58,12 +58,12 @@ for each in collection.find( {'entities.urls.display_url' : regx}):#, { 'entitie
 				if chave:
 					if codigo in vetor:
 
-						f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+"', '"+site+"', '"+URL+"', 'Retweet', 'NULO')\n")
+						f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+"', '"+site+"', '"+URL+"', 'Retweet', 'NULO');\n")
 					else:
-						f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+"', '"+site+"', '"+URL+"', 'Retweet', 'Primeiro')\n")
+						f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+"', '"+site+"', '"+URL+"', 'Retweet', 'Primeiro');\n")
 						vetor.append(codigo)
 				else:
-					f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+ "', '"+site+"', '"+URL+"', 'Tweet', 'NULO')\n")
+					f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+ "', '"+site+"', '"+URL+"', 'Tweet', 'NULO');\n")
 				twitpic = twitpic + 1 
 			except:
 				pass
