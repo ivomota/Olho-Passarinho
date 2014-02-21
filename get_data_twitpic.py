@@ -19,7 +19,7 @@ collection = db.tweets
 regx = re.compile("^twitpic.com", re.IGNORECASE)
 
 # f = open('/Applications/MAMP/htdocs/Tese/Results/twitpic_urls_2.txt', 'w')
-f = open('./resultados/twitpic_urls.txt', 'w')
+f = open('./resultados/twitpic_urls.sql', 'w')
 
 data = []
 vetor = []
@@ -34,7 +34,9 @@ chave = False
 # a[each['_id']] = each["entities"]["urls"][0]["display_url"]
     
 for each in collection.find( {'entities.urls.display_url' : regx}):#, { 'entities.urls.display_url' : 1} ):
-	ID = each["_id"]
+	# ID = each["_id"]
+	ID = each["id_str"]
+	
 	URL = each["entities"]["urls"][0]["display_url"]
 	try:
 		RETWEET = each["retweeted_status"]
@@ -50,17 +52,18 @@ for each in collection.find( {'entities.urls.display_url' : regx}):#, { 'entitie
 
 	try:
 		codigo = n.group(1)
-		print codigo
+		# print codigo
 		if site == 'twitpic':
 			try:
 				if chave:
 					if codigo in vetor:
-						f.write(str(ID)+','+URL+', Retweet, NULL\n')
+
+						f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+"', '"+site+"', '"+URL+"', 'Retweet', 'NULO')\n")
 					else:
-						f.write(str(ID)+','+URL+', Retweet, Primeiro\n')
+						f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+"', '"+site+"', '"+URL+"', 'Retweet', 'Primeiro')\n")
 						vetor.append(codigo)
 				else:
-					f.write(str(ID)+','+URL+', Original\n, NULL')
+					f.write("INSERT INTO imagens (id_objeto, servico, url, tipo, retweet) VALUES (""'"+str(ID)+ "', '"+site+"', '"+URL+"', 'Tweet', 'NULO')\n")
 				twitpic = twitpic + 1 
 			except:
 				pass
