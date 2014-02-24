@@ -32,4 +32,4 @@ Total       |85512          |-              |
 
 [^2]:Esta coleção é com os tweets portugueses do Brasil.
 
-[^3]:Inclui serviços Twitpic, Twitter, Instagram e Flickr.
+[^3]:Inclui serviços Twitpic, Twitter e Instagram.

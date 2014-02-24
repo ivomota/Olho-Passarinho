@@ -16,7 +16,7 @@ db = client.socialecho_br
 collection = db.tweets
 #regx = re.compile("pic|twitpic|flic|instagram", re.IGNORECASE)
 #regx = re.compile("^pic.twitter.com", re.IGNORECASE)
-regx = re.compile("^twitpic|^pic|^instagram|^flic", re.IGNORECASE)
+regx = re.compile("^twitpic|^pic|^instagram", re.IGNORECASE)
 
 # f = open('/Applications/MAMP/htdocs/Tese/Results/twitpic_urls_2.txt', 'w')
 f = open('./resultados/insert_data.sql', 'w')
