@@ -28,7 +28,6 @@ vetor = []
 twitpic = 0
 pic = 0
 insta = 0
-flic = 0
 
 count = 0
 ret = 0
@@ -39,7 +38,7 @@ insert = False
 # if each["entities"]["urls"][0]["display_url"].startswith('twitpic.com'):
 # a[each['_id']] = each["entities"]["urls"][0]["display_url"]
     
-for each in collection.find( {'entities.urls.display_url' : regx}):
+for each in collection.find( {'entities.urls.display_url' : regx}).limit(10000):
 	ID = each["id_str"]
 	
 	URL = each["entities"]["urls"][0]["display_url"]
@@ -77,13 +76,6 @@ for each in collection.find( {'entities.urls.display_url' : regx}):
 			insert = True
 		except:
 			insert = False
-	elif site == "flickr":
-		try:
-			codigo = n.group(1)
-			flic+=1
-			insert = True
-		except:
-			insert = False
 	else:
 		insert = False
 	
@@ -116,10 +108,7 @@ print "_________________________________________________"
 print "Serviço: Instagram\n"
 print "Numero de urls --> " + str(insta)
 print "\n"
-print "_________________________________________________"
-print "Serviço: Flickr\n"
-print "Numero de urls --> " + str(flic)
-print "\n"
+
 
 f.close()
 

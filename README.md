@@ -23,10 +23,9 @@ Um extensão do TweeProfiles para fotografia
 Serviço     | Nº de Imagens | Url           | Full Url
 :-----------|:--------------|:--------------|:---------------------
 Twitter     |202            |pic.twitter.com|
-Twitpic     |610            |twitpic.com    |twitpic.com/show/full/id
-Instagram   |79246          |instagram.com  |
-Flickr      |69             |flic.com       |
-Total       |80027          |-              |
+Twitpic     |6100           |twitpic.com    |twitpic.com/show/full/id
+Instagram   |79210          |instagram.com  |
+Total       |85512          |-              |
      
 
 [^1]:Esta coleção é com os tweets portugueses de Portugal.
