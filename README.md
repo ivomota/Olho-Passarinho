@@ -1,34 +1,37 @@
 Olho-Passarinho
 ===============
-
 Um extensão do TweeProfiles para fotografia
 
+--------------------
 
-### Mongodb Server ####
+## Mongodb Server ##
+--------------------
 
-*  mongo 192.168.102.190/socialecho
-** mongo 192.168.102.190/socialecho_br
+- mongo 192.168.102.190/socialecho[^1] 
+- mongo 192.168.102.190/socialecho_br[^2]
 
-collection tweets
+**Collection**: tweets
+   
+ [^1]:Esta coleção é com os tweets portugueses de Portugal.
+ 
+ [^2]:Esta coleção é com os tweets portugueses do Brasil.
 
-Nota 	--> * Esta coleção é com os tweets portugueses de Portugal
-		--> ** Esta coleção é com os tweets portugueses do Brasil
 
+## INFO ##
+----------------
 
-### INFO ####
-
-Número de tweets --> 
-Número de tweets com url --> 
-Número de tweets com url de imagem --> 
-
-Número de tweets com url de pic.twitter.com --> 
-Número de tweets com url de twitpic.com --> 
-Número de tweets com url de instagram.com --> 
-Número de tweets com url de flic.com --> 
+- Número de tweets: 1704273
+- Número de tweets com url de imagens: 86349[^3] 
 
 
 
-Link to image twitpic: 
-	n = URL.split('/')
-	n = str(n[1])
-	full_url = ('http://twitpic.com/show/full/' + n )
+ Serviço    | Nº de Imagens | Url           | Full Url
+:-----------|:--------------|:--------------|:---------------------
+Twitter     |202            |pic.twitter.com|http://twitpic.com/show/full/id
+Twitpic     |610            |twitpic.com    |
+Instagram   |79246          |instagram.com  |
+Flickr      |69             |flic.com       |
+Total       |80027          |-              |
+     
+
+[^3]:Inclui serviços Twitpic, Twitter, Instagram e Flickr.
