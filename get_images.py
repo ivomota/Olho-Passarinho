@@ -4,17 +4,6 @@ import urllib
 import urllib2
 import sys
 from PIL import Image
-# import sqlite3
-
-
-# location = 'data.db'
-# table_name = 'imagens'
-# qry = "SELECT url, id_objeto FROM imagens WHERE tipo = 'Tweet' LIMIT 100;"
-
-# conn = sqlite3.connect(location)
-# c = conn.cursor()
-
-# for URL in c.execute(qry):
 
 
 def get(qry):
@@ -22,9 +11,16 @@ def get(qry):
 	j=0
 	# print qry
 	for URL in qry:
-		n = URL[0].split('/') 
-		n = str(n[1]) 
-		full_url = ('http://twitpic.com/show/full/' + n )
+		n = URL[0].split('/')
+
+		if str(n[0]) == 'twitpic.com':
+			n = str(n[1]) 
+			full_url = ('http://twitpic.com/show/full/' + n )
+		elif str(n[0]) == 'instagram.com':
+			url_inst = str(URL[0]) 
+			full_url = 'http://'+url_inst+'media/?size=l\n'
+		elif str(n[0]) == 'pic.twitter.com':
+			print str(URL[0])	
 		j+=1
 		id_tweet = URL[1]
 		try:
@@ -47,14 +43,9 @@ def get(qry):
 			i+=1
 	print "Numero total de imagens: " + str(j)	
 	print "Numero total de imagens guardadas: " + str(i)
-# conn.commit()
-# c.close()
-# conn.close()
 
 
 
-
-	
 #URL para intagram
 # url_inst = data[i]["entities"]["urls"][0]["expanded_url"]
 # full_url_inst = url_inst+'media/?size=l\n'
