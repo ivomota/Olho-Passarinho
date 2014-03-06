@@ -10,6 +10,7 @@ from scipy.cluster.vq import *
 from StringIO import StringIO   # StringIO behaves like a file object
 from PIL import Image
 
+
 if __name__ == '__main__':
 	# get list of images
 	imlist = imtools.get_imlist('../img/teste/') 
