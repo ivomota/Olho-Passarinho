@@ -3,9 +3,10 @@
 import cStringIO # *much* faster than StringIO 
 import cv2
 import numpy as np
-import imtools
 import matplotlib.pyplot as plt
 import cPickle as pickle
+
+import imtools		#ficheiro
 
 from scipy.cluster.vq import *
 
@@ -19,23 +20,13 @@ def pickle_keypoints(keypoints, descriptors):
 	return temp_array
 
 
-def unpickle_keypoints(array): 
-	keypoints = [] 
-	descriptors = [] 
-	for point in array: 
-		temp_feature = cv2.KeyPoint(x=point[0][0],y=point[0][1],_size=point[1], _angle=point[2], _response=point[3], _octave=point[4], _class_id=point[5]) 
-		temp_descriptor = point[6] 
-		keypoints.append(temp_feature) 
-		descriptors.append(temp_descriptor) 
-	return keypoints, np.array(descriptors)
-
-
 # get list of images
-imlist = imtools.get_imlist('../img/sunsets/teste/') 
+imlist = imtools.get_imlist('../img/sunsets/treino/') 
 
 imnbr = len(imlist)
 
-print imnbr
+
+dic = 100
 
 temp_array = [] 
 
@@ -58,8 +49,8 @@ for i in range(imnbr):
 	temp = pickle_keypoints(keypoints, descriptor) 
 	temp_array.append(temp)
 
-
-pickle.dump(temp_array, open("keypoints_database.p", "wb"))
+	image =  imlist[i][:-3]
+	pickle.dump(temp_array, open(str(image)+"sift", "wb"))
 
 
 

@@ -35,12 +35,12 @@ if __name__ == '__main__':
 	code, distance = vq(projected, centroids)
 
 	# plot clusters
-	for k in range(5):
+	for k in range(4):
 		ind = np.where(code==k)[0]
 		plt.figure()
 		plt.gray()
 		for i in range(np.minimum(len(ind),40)):
-			plt.subplot(5,10,i+1) 
+			plt.subplot(4,10,i+1) 
 			plt.imshow(immatrix[ind[i]].reshape((128,128))) 
 			plt.axis('off')
 	plt.show()
