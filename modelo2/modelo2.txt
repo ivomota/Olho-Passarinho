@@ -1,0 +1,13 @@
+Modelo2
+
+
+1. Recolher ids dos tweets com imagens do twitpic:
+	- Base de dados local:
+		Select id_tweet from IMAGENS where servico = 'twitpic'
+
+	Adicionar resultados a uma lista (python)
+
+2. Recolher tweets selecionados anteriormente que tenham geolocalização
+	- Mongodb
+	
+	Numero de tweets --> 
