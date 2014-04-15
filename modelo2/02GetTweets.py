@@ -28,19 +28,21 @@ lst = np.loadtxt('id_tweets.gz', delimiter=" ", dtype=(str))
 # 		# print each['user']['id_str']
 # 		print each['geo']
 # 		i += 1
+i = 1
 
+for j in range(len(lst)):
+	doc = collection.find({ '$and' :[ {'id_str': lst[j]}, { 'coordinates' : {'$ne': None} } ] }, {'coordinates' : 1, 'created_at': 1, 'text': 1, 'user': 1 }).limit(1)
+	for elem in doc:
+		print j
+		print i
+		i += 1
+		# print elem['coordinates']['coordinates']
+		# print elem['created_at']
+		# print elem['text']
+		# print elem['user']['id']
+		# print elem['user']['name']
 
-# for j in range(len(lst)):
-doc = collection.find({ '$and' :[ {'id_str': lst[22]}, { 'coordinates' : {'$ne': None} } ] }, {'coordinates' : 1, 'created_at': 1, 'text': 1, 'user': 1 }).limit(1)
-	# if len(doc) != 0:
-for elem in doc:
-	print elem['coordinates']['coordinates']
-	print elem['created_at']
-	print elem['text']
-	print elem['user']['id']
-	print elem['user']['name']
-
-
+print "final: " + i
 
 		# print j
 

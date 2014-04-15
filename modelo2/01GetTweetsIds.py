@@ -20,14 +20,14 @@ con = sqlite3.connect("data.db")
 con.isolation_level = None
 cur = con.cursor()
 
-sql = "select id_tweet from IMAGENS where servico = 'twitpic' and tipo = 'tweet';"
+sql = "select id_tweet from IMAGENS where servico = 'instagram' and tipo = 'tweet';"
 
 print sql
 
-if sqlite3.complete_statement(buffer):
+if sqlite3.complete_statement(sql):
         try:
             # buffer = buffer.strip()
-            cur.execute(slq)
+            cur.execute(sql)
 
             if sql.lstrip().upper().startswith("SELECT"):
                 # print cur.fetchall()
