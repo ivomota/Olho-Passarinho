@@ -9,7 +9,7 @@ os.system(cmmd)
 content = []
 clusters = []
 
-f = open('ctest.txt')
+f = open('R_Project_server/ctest.txt')
 for line in f:
     content.append( line )
 f.close()

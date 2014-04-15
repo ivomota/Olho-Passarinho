@@ -3,11 +3,20 @@ Modelo2
 
 1. Recolher ids dos tweets com imagens do twitpic:
 	- Base de dados local:
-		Select id_tweet from IMAGENS where servico = 'twitpic'
+		Select id_tweet from IMAGENS where servico = 'twitpic' and tipo = 'tweet'
+		Numero de tweets --> 1512
 
-	Adicionar resultados a uma lista (python)
+	Adicionar resultados a um array(python)
+	Gravar para um ficheiro binário
 
 2. Recolher tweets selecionados anteriormente que tenham geolocalização
 	- Mongodb
 	
-	Numero de tweets --> 
+	Abrir ficheiro binário
+	Aceder a base de dados mongo db
+	Tweets com geolocalização:
+		Numero de tweets --> 48
+	matrix com:
+		"status_id", "user_id", "user_name", "timestamp", "latitude", "longitude", "text"
+	
+

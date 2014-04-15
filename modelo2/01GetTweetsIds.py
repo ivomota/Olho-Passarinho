@@ -1,30 +1,35 @@
 # -*- encoding: utf-8 -*-
 
 import sqlite3
+import numpy as np
 
 def getids(qry):
     lst = []
     for idt in qry:
          lst.append(str(idt[0]))
-    f = open('./id_tweets.txt', 'w')
-    f.write(str(lst))
-    f.close()
+    lst = np.array(lst)
+    # print lst
+    # print lst[0]
+    np.savetxt('id_tweets.gz', lst, delimiter=" ", fmt="%s")   
+    # f = open('./id_tweets.txt', 'w')
+    # f.write(str(lst))
+    # f.close()
     print len(lst)
 
 con = sqlite3.connect("data.db")
 con.isolation_level = None
 cur = con.cursor()
 
-buffer = "select id_tweet from IMAGENS where servico = 'twitpic';"
+sql = "select id_tweet from IMAGENS where servico = 'twitpic' and tipo = 'tweet';"
 
-print buffer
+print sql
 
 if sqlite3.complete_statement(buffer):
         try:
             # buffer = buffer.strip()
-            cur.execute(buffer)
+            cur.execute(slq)
 
-            if buffer.lstrip().upper().startswith("SELECT"):
+            if sql.lstrip().upper().startswith("SELECT"):
                 # print cur.fetchall()
                 qry = cur.fetchall()
                 # print qry

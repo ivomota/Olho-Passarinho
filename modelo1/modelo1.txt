@@ -34,6 +34,11 @@ Este modelo está dividido em 4 partes:
 			- imtools.py
 			- vocabulary.py
 
+	- Apresentação da lista de imagens por clusters
+		Ficheiro
+			- clustering.py
+		Dependências
+			- imtools.py
 
 Base de dados: data.db
 	- O esquema desta base de dados pode ser vista no ficheiro
