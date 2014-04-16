@@ -3,8 +3,8 @@ Modelo2
 
 1. Recolher ids dos tweets com imagens do twitpic:
 	- Base de dados local:
-		Select id_tweet from IMAGENS where servico = 'twitpic' and tipo = 'tweet'
-		Numero de tweets --> 1512
+		Select id_tweet from IMAGENS where servico = 'instagram' and tipo = 'tweet'
+		Numero de tweets --> 57342
 
 	Adicionar resultados a um array(python)
 	Gravar para um ficheiro binário
@@ -14,9 +14,10 @@ Modelo2
 	
 	Abrir ficheiro binário
 	Aceder a base de dados mongo db
-	Tweets com geolocalização:
-		Numero de tweets --> 48
-	matrix com:
-		"status_id", "user_id", "user_name", "timestamp", "latitude", "longitude", "text"
-	
+	Tweets com geolocalização e imagens instagram:
+		7623 (com duplicação)
+		7195  
 
+	matrix com:
+		"id_tweet", "user_id", "user_name", "timestamp", "latitude", "longitude", "text", "url"
+	
