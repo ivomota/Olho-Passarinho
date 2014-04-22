@@ -1,0 +1,25 @@
+{
+    "_id": {
+        "$oid": "52c6d0f08ef20d397e42b516"
+    },
+    "coordinates": {
+        "coordinates": [
+            -8.61136747,
+            41.14668427
+        ]
+    },
+    "created_at": "Tue Jun 18 17:02:09 +0000 2013",
+    "entities": {
+        "urls": [
+            {
+                "display_url": "instagram.com/p/atTgTbEu0S/"
+            }
+        ]
+    },
+    "id_str": "347036525172772864",
+    "text": "#ogiganteacordou #DilmaNAO #brasilnarua #foradilma #verasqueumfilhoteunaofogealuta #vamospararuas\u2026 http://t.co/AF0hcTxUBX",
+    "user": {
+        "id_str": "1072354428",
+        "name": "Carlos Roma"
+    }
+}

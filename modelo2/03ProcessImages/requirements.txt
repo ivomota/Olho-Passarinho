@@ -1,0 +1,9 @@
+Requirements:
+
+Python:
+ - rpy2
+
+
+
+R:
+ - fpc
