@@ -9,7 +9,7 @@ def get_imlist(path):
     """    Returns a list of filenames for 
         all jpg images in a directory. """
         
-    return [os.path.join(path,f) for f in os.listdir(path) if f.endswith('.jpg')]
+    return [os.path.join(path,f) for f in os.listdir(path) if f.endswith('.jpeg')]
 
 
 def compute_average(imlist):
