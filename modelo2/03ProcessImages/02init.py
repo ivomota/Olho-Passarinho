@@ -35,4 +35,3 @@ for i in range(nbr_images): # [nr_exist:end_val]:
 		sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
 		sys.stdout.flush()
 
-##Gerou 5398
