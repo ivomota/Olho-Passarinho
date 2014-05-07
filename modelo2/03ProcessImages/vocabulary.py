@@ -2,6 +2,7 @@ from numpy import *
 from scipy.cluster.vq import *
 import sift
 import sys
+import time
 
 
 class Vocabulary(object):
@@ -31,19 +32,28 @@ class Vocabulary(object):
 
         print "Geting all features..."
         end_val = nbr_images
+        e = 0
         for i in arange(1,nbr_images):
-            try:
-                descr.append(sift.read_features_from_file(featurefiles[i])[1])
-                descriptors = vstack((descriptors,descr[i]))
-            except:
+            des = sift.read_features_from_file(featurefiles[i])[1]
+            if isinstance(des, ndarray):
+                descr.append(des)
+                descriptors = vstack((descriptors,descr[i-e]))
+            else:
                 self.error.append(featurefiles[i])
-            
-            percent = float(i) / end_val
-            bar_length = 20
-            hashes = '=' * int(round(percent * bar_length))
-            spaces = ' ' * (bar_length - len(hashes))
-            sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
+                e += 1
+
+            sys.stdout.write("\r" + str(i))
             sys.stdout.flush()
+
+            # percent = float(i) / end_val
+            # bar_length = 20
+            # hashes = '=' * int(round(percent * bar_length))
+            # spaces = ' ' * (bar_length - len(hashes))
+            # sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
+            # sys.stdout.flush()
+
+        print "\nNumber of images analysed: " + str(len(descr))
+        print "Number of errors: " + str(e)
          
         print "\nKmeans clustering for visual words"
         # k-means: last number determines number of runs
@@ -52,9 +62,21 @@ class Vocabulary(object):
         
         print "\nProjecting on vocabulary"   
         # go through all training images and project on vocabulary
-        imwords = zeros((nbr_images,self.nbr_words))
-        for i in range( nbr_images ):
+        imwords = zeros(((nbr_images-e),self.nbr_words))
+        end_val = nbr_images - e 
+        for i in range(end_val):
             imwords[i] = self.project(descr[i])
+            sys.stdout.write("\r" + str(i))
+            sys.stdout.flush()
+
+            # percent = float(i) / end_val
+            # bar_length = 20
+            # hashes = '=' * int(round(percent * bar_length))
+            # spaces = ' ' * (bar_length - len(hashes))
+            # sys.stdout.write("\rPercent: [{0}] {1}%".format(hashes + spaces, int(round(percent * 100))))
+            # sys.stdout.flush()
+
+
         
         print "\nFinishing..."
         nbr_occurences = sum( (imwords > 0)*1 ,axis=0)

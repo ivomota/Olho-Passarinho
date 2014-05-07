@@ -12,10 +12,18 @@ featlist = [ imlist[i][:-4]+'sift' for i in range(nbr_images) ]
 
 #create vocabulary
 voc = vocabulary.Vocabulary('vocab')
-voc.train(featlist,1000,100)
-print 'vocabulary errors:', voc.error
+voc.train(featlist[0:450],1000,100)
+print 'vocabulary errors: ' + str(len(voc.error))
 
 #saving vocabulary
 with open('vocabulary.pkl', 'wb') as f:
   pickle.dump(voc,f)
 print 'vocabulary is:', voc.name, voc.nbr_words
+
+data = load('../tweets_instagram_final.pkl')
+length = len(data)
+
+w = open('im_to_rm.txt', 'w')
+w.write(str(voc.error))
+w.close()
+

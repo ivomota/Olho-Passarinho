@@ -142,7 +142,8 @@ with open('../tweets_instagram_final.pkl', 'wb') as f:
   pickle.dump(data,f)
 
 '''
-Percent: [====================] 100 Numero total de imagens: 7195
+Percent: [====================] 100 
+Numero total de imagens: 7195
 Numero total de imagens guardadas: 5958
 Numero total de imagens não encontradas: 5958
 Numero total de imagens falharam o download: 7

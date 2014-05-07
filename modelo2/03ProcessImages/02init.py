@@ -11,15 +11,16 @@ def get_siftlist(path):
         
     return [os.path.join(path,f) for f in os.listdir(path) if f.endswith('.sift')]
 
+path = './img/'
+
 # get list of images
-imlist = imtools.get_imlist('./img/') 
+imlist = imtools.get_imlist(path) 
 nbr_images = len(imlist)
 print "Numero de imagens armazenadas: " + str(nbr_images)
 
 
 featlist = [ imlist[i][:-4]+'sift' for i in range(nbr_images)]
 
-path = './img/'
 exist_sift = get_siftlist(path)
 nr_exist = len(exist_sift)
 

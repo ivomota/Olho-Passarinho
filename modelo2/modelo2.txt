@@ -22,4 +22,29 @@ Modelo2
 	Info armazenada:
 		"id_tweet", "user_id", "user_name", "timestamp", "latitude", "longitude", "text", "url"
 	
-03. Recolher imagens e remover Tweets em que as imagens não podem ser armazenadas
+03. SubProcesso: 
+	
+	01. Recolhe imagens
+			- 5968 imagens
+		Remove Tweets em que as imagens não podem ser armazenadas
+			- 1227 tweets removidos
+	
+	02. Cria ficheiros sift com descritores
+
+	03. Cria ficheiro com vocabulário
+			- É necessário correr o cleanerros.py para eliminar ficheiros que não contenham informação
+
+	04.	Cria base de dados
+			- É necessário correr o cleanerros.py para eliminar ficheiros que não contenham informação
+
+
+	Scripts nessesários:
+		sift.py
+		vocabulary.py
+		imtools.py
+		imagesearch.py
+		cleanerrors.py		 	
+
+
+
+	
