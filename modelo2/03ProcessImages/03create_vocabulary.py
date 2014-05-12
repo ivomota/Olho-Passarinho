@@ -1,7 +1,8 @@
-import pickle 
-import vocabulary
-import imtools
-import sift
+import pickle
+
+from libraries import vocabulary
+from libraries import imtools
+from libraries import sift
 
 
 # get list of images

@@ -1,10 +1,9 @@
 import pickle 
-import sift
-import imagesearch
-import imtools
+from libraries import sift
+from libraries import imagesearch
+from libraries import imtools
 import sys
 from numpy import *
-
 
 
 # get list of images
