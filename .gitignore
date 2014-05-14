@@ -38,3 +38,6 @@ nosetests.xml
 resultados/data.json
 
 *.jpeg
+.Rproj.user
+
+modelo2/03ProcessImages/vocab.db
