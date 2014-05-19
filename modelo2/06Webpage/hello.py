@@ -22,10 +22,11 @@ def start():
 	clusters = []
 	for cluster in folders:
 		clusters.append(get_urls(cluster))
-	# images = get_urls(clusters)
-	# print type(images)
 	return render_template('index.html', clusters = clusters)
 
+# @app.route('/cluster')
+# def cluster():
+	
 
 if __name__ == '__main__':
 	app.debug = True
