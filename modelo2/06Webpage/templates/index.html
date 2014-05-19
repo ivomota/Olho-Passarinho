@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	{% for cluster in clusters %}
+		<div>
+			<h3>Cluster</h3>
+				{% for image in cluster %}
+					<img style="width: 30px;" src="{{ image }}">
+				{% endfor %}
+			<span style="width: 5px; color: black"></span>
+		</div>
+	{% endfor %}
+
+</body>
+</html>
