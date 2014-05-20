@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Olhó-Passarinho</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<style type="text/css">
+		div.invisible{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	{% for cluster in clusters %}
+		<button style="height: 30px;" id="{{ loop.index }}">
+			<h3 style="margin-top: 0px;" class="title" >Cluster{{ loop.index }}</h3>
+		</button>
+		<div class="cluster invisible" id="cluster{{ loop.index }}">
+			{% for image in cluster %}
+				{% if loop.index < 200 %}
+					<img style="width: 30px;" src="{{ image }}">
+				{% endif %}
+			{% endfor %}
+		</div>	
+		<hr style="width: 100%; color: black"></hr>
+
+	{% endfor %}
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('button').click(function(){
+				var id_ = $(this).attr('id');
+				console.log(id_);
+				$('div#cluster'+id_).toggle();
+			});
+		});
+	</script>
+</body>
+</html>
