@@ -24,9 +24,15 @@ def start():
 		clusters.append(get_urls(cluster))
 	return render_template('index.html', clusters = clusters)
 
-# @app.route('/cluster')
+# @app.route('/cluster', methods=['GET', 'POST'])
 # def cluster():
-	
+# 	path = 'static/img/'
+# 	folders = get_clusters(path)
+# 	print folders
+# 	clusters = []
+# 	for cluster in folders:
+# 		clusters.append(get_urls(cluster))
+# 	return render_template('app.html', clusters = clusters)
 
 if __name__ == '__main__':
 	app.debug = True

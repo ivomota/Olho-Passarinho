@@ -1,23 +1,32 @@
 import os
-from libraries import imtools
-from pylab import *
+# from libraries import imtools
+# from pylab import *
 
+# def get_folder_clusters(path_folders):
+# 	return [os.path.join(path_folders,f) for f in os.listdir(path_folders) if not f.endswith('.DS_Store')]
 
 def get_clusters(path):
-    """    Returns a list of filenames for 
-        all jpg images in a directory. """
-        
-    return [os.path.join(path,f) for f in os.listdir(path)]
+	return [os.path.join(path,f) for f in os.listdir(path)]
 
-cmmd = str("Rscript R_server/clustering.R")
-print cmmd
-os.system(cmmd)
+scripts = ['clustering0.R', 'clustering1.R', 'clustering2.R']
 
-content = []
+for script in scripts:
+	cmmd = str("Rscript ../R_server/" + script)
+	print cmmd
+	os.system(cmmd)
 
-path = '../R_server/clusters'
-clusters = get_clusters(path)
-print clusters
+# path_folders = '../R_server/clusters'
+# folders = get_folder_clusters(path_folders)
+# print folders
+
+# content = []
+
+# path = '../R_server/clusters'
+# clusters = get_clusters(path)
+# print clusters
+
+
+###################
 
 # f = open('R_server/clusters')
 # for line in f:

@@ -2,9 +2,10 @@ from numpy import *
 import os
 import shutil
 
+def get_cfolders(path):
+	return [os.path.join(path,f) for f in os.listdir(path) if not f.endswith('.DS_Store')]
+
 def get_cfiles(path):
-	"""    Returns a list of folders for 
-    all clusters images in a directory. """ 
 	return [os.path.join(path,f) for f in os.listdir(path) if f.endswith('.txt')]
 
 def getcluster(cfile):
@@ -21,26 +22,29 @@ def im_urls(cluster):
 	return urls
 
 path = './R_server/clusters/'
-cfiles = get_cfiles(path)
-print cfiles
+cfolders = get_cfolders(path)
+print cfolders
+for j, path in enumerate(cfolders):
+	cfiles = get_cfiles(path)
+	print cfiles
 
-for i, cfile in enumerate(cfiles):
-	cluster = getcluster(cfile)
-	images = im_urls(cluster)
+	for i, cfile in enumerate(cfiles):
+		cluster = getcluster(cfile)
+		images = im_urls(cluster)
 
-	path_orig = './03ProcessImages/img/'
-	path_dest = './06Webpage/static/img/C'+ str(i) +'/'
+		path_orig = './03ProcessImages/img/'
+		path_dest = './06Webpage/static/img/S'+ str(j) +'/C'+ str(i) +'/'
 
-	if not os.path.exists(path_dest):
-		os.makedirs(path_dest)
+		if not os.path.exists(path_dest):
+			os.makedirs(path_dest)
 
-	# try:
-	#     os.stat(path_dest)
-	# except:
-	#     os.mkdir(path_dest) 
+		# try:
+		#     os.stat(path_dest)
+		# except:
+		#     os.mkdir(path_dest) 
 
-	for image in images:
-		src = path_orig + image
-		dst = path_dest + image
-		shutil.copyfile(src, dst)
+		for image in images:
+			src = path_orig + image
+			dst = path_dest + image
+			shutil.copyfile(src, dst)
 
