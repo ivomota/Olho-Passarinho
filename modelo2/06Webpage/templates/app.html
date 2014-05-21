@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Olhó-Passarinho</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<style type="text/css">
-		div.invisible{
-			display: none;
-		}
-	</style>
-</head>
-<body>
-	{% for cluster in clusters %}
+{% extends "index.html" %}
+
+{% block body %}
+
+{% for cluster in clusters %}
 		<button style="height: 30px;" id="{{ loop.index }}">
 			<h3 style="margin-top: 0px;" class="title" >Cluster{{ loop.index }}</h3>
 		</button>
@@ -32,7 +24,9 @@
 				console.log(id_);
 				$('div#cluster'+id_).toggle();
 			});
+
+			$("#subset option[value='{{req}}']").attr('selected', 'selected');
 		});
 	</script>
-</body>
-</html>
+
+{% endblock %}

@@ -10,29 +10,17 @@
 	</style>
 </head>
 <body>
-	{% for cluster in clusters %}
-		<button style="height: 30px;" id="{{ loop.index }}">
-			<h3 style="margin-top: 0px;" class="title" >Cluster{{ loop.index }}</h3>
-		</button>
-		<div class="cluster invisible" id="cluster{{ loop.index }}">
-			{% for image in cluster %}
-				{% if loop.index < 200 %}
-					<img style="width: 30px;" src="{{ image }}">
-				{% endif %}
-			{% endfor %}
-		</div>	
-		<hr style="width: 100%; color: black"></hr>
+	<form action="/cluster" method="POST">
+		<select name="subset" id="subset" onchange="this.form.submit()">
+			<option value='null'>- choose a subset -</option>
+		  	<option value="S0">Subset 0</option>
+		  	<option value="S1">Subset 1</option>
+		  	<option value="S2">Subset 2</option>
+		</select>
+	</form>
 
-	{% endfor %}
+	{% block body %}{% endblock %}
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('button').click(function(){
-				var id_ = $(this).attr('id');
-				console.log(id_);
-				$('div#cluster'+id_).toggle();
-			});
-		});
-	</script>
+	
 </body>
 </html>

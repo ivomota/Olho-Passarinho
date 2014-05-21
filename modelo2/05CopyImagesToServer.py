@@ -26,7 +26,7 @@ cfolders = get_cfolders(path)
 print cfolders
 for j, path in enumerate(cfolders):
 	cfiles = get_cfiles(path)
-	print cfiles
+	# print cfiles
 
 	for i, cfile in enumerate(cfiles):
 		cluster = getcluster(cfile)
@@ -46,5 +46,9 @@ for j, path in enumerate(cfolders):
 		for image in images:
 			src = path_orig + image
 			dst = path_dest + image
-			shutil.copyfile(src, dst)
+			if not os.path.isfile(dst):
+				shutil.copyfile(src, dst)
+				# print str(image) + " do not exist"
+			# else:
+				# print str(image) + " exist"
 

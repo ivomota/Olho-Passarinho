@@ -16,24 +16,20 @@ def get_urls(path):
 
 @app.route('/')
 def start():
-	path = 'static/img/'
+	return render_template('index.html')
+
+@app.route('/cluster', methods= ['GET', 'POST'])
+def cluster():
+	req = request.form['subset']
+
+	path = 'static/img/' + str(req)
 	folders = get_clusters(path)
 	print folders
 	clusters = []
 	for cluster in folders:
 		clusters.append(get_urls(cluster))
-	return render_template('index.html', clusters = clusters)
-
-# @app.route('/cluster', methods=['GET', 'POST'])
-# def cluster():
-# 	path = 'static/img/'
-# 	folders = get_clusters(path)
-# 	print folders
-# 	clusters = []
-# 	for cluster in folders:
-# 		clusters.append(get_urls(cluster))
-# 	return render_template('app.html', clusters = clusters)
+	return render_template('app.html', clusters = clusters, req = req)
 
 if __name__ == '__main__':
-	app.debug = True
-	app.run()
+	# app.debug = True
+	app.run(host='0.0.0.0')
