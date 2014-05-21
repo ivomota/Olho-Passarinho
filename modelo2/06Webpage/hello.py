@@ -21,15 +21,17 @@ def start():
 @app.route('/cluster', methods= ['GET', 'POST'])
 def cluster():
 	req = request.form['subset']
-
-	path = 'static/img/' + str(req)
-	folders = get_clusters(path)
-	print folders
-	clusters = []
-	for cluster in folders:
-		clusters.append(get_urls(cluster))
-	return render_template('app.html', clusters = clusters, req = req)
+	if req == "null":
+		return render_template('test.html')
+	else:
+		path = 'static/img/' + str(req)
+		folders = get_clusters(path)
+		print folders
+		clusters = []
+		for cluster in folders:
+			clusters.append(get_urls(cluster))
+		return render_template('app.html', clusters = clusters, req = req)
 
 if __name__ == '__main__':
-	# app.debug = True
+	app.debug = True
 	app.run(host='0.0.0.0')

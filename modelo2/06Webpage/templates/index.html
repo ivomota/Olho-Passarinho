@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Olhó-Passarinho</title>
+	<link rel="stylesheet" type="text/css" href="static/ink/css/ink.min.css">
+	<link rel="stylesheet" type="text/css" href="static/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<style type="text/css">
-		div.invisible{
-			display: none;
-		}
-	</style>
 </head>
 <body>
-	<form action="/cluster" method="POST">
-		<select name="subset" id="subset" onchange="this.form.submit()">
-			<option value='null'>- choose a subset -</option>
-		  	<option value="S0">Subset 0</option>
-		  	<option value="S1">Subset 1</option>
-		  	<option value="S2">Subset 2</option>
-		</select>
-	</form>
+	<div class="ink-grid">
+		<header class="vertical-space">
+                <h1>Olhó-Passarinho<small> uma extensão do TweeProfiles para fotografias</small></h1>
+        </header>
+		<form class="ink-form" action="/cluster" method="POST">
+			<select name="subset" id="subset" onchange="this.form.submit()">
+				<option value='null'>- choose a subset -</option>
+			  	<option value="S0">Subset 0</option>
+			  	<option value="S1">Subset 1</option>
+			  	<option value="S2">Subset 2</option>
+			</select>
+		</form>
+		<br>
+		{% block body %}{% endblock %}
 
-	{% block body %}{% endblock %}
+		{% block error %}{% endblock %}
 
+
+	</div>
 	
 </body>
 </html>
