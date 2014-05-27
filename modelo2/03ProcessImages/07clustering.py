@@ -15,6 +15,8 @@ for script in scripts:
 	print cmmd
 	os.system(cmmd)
 
+
+
 # path_folders = '../R_server/clusters'
 # folders = get_folder_clusters(path_folders)
 # print folders
