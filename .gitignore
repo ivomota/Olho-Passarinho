@@ -41,3 +41,7 @@ resultados/data.json
 .Rproj.user
 
 modelo2/03ProcessImages/vocab.db
+
+modelo2/matrix_combined/S0/*.rds
+modelo2/matrix_combined/S1/*.rds
+modelo2/matrix_combined/S2/*.rds
