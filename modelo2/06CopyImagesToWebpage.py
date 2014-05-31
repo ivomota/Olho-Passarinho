@@ -7,7 +7,7 @@ def get_files(path):
 path = './03ProcessImages/img/'
 imfiles = get_files(path)
 
-path_dst = './07Webpage/static/img/'
+path_dst = './Webpage/static/img/'
 
 for imfile in imfiles:
 	name = imfile.split('/')[3]
