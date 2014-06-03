@@ -1,30 +1,147 @@
 {% extends "index.html" %}
 
+{% block script %}
+
+<script type="text/javascript">
+
+  	var jsonfile = 'static/data/S'+{{jsonfile}}+'.json';
+  	var geoinfo = {{geoinfo | safe}}; //0 - Index of tweet; 1 - Radius
+  	var clusters = {{clusters | safe}}
+  	// console.log(geoinfo[clusters[0]])
+  	
+
+  	//path for json file with index of clusters
+  	var path = 'static/temp/clusters_info.json'
+
+	var data = [];
+	var info = []
+	$.ajax({
+	  url: jsonfile,
+	  async: false,
+	  dataType: 'json',
+	  success: function (json) {
+	    data = json;
+	  }
+	});
+	// console.log(data)
+
+	$.ajax({
+	  url: path,
+	  async: false,
+	  dataType: 'json',
+	  success: function (json) {
+	    info = json;
+	  }
+	});
+	// console.log(info)
+
+	var cluster = {};
+	// First, create an object containing LatLng and population for each city.
+	for (i in clusters){
+		var a = clusters[i];
+	  	lat = data[geoinfo[a][0]]['coordinates']['coordinates'][0]
+		log = data[geoinfo[a][0]]['coordinates']['coordinates'][1]
+		// console.log(lat);
+		// console.log(log);
+
+		cluster[a] = {
+			center: new google.maps.LatLng(log, lat),
+			radius: geoinfo[a][1]
+		};
+		// console.log(cluster[a].radius)
+		// console.log(cluster[a].center)
+	}
+	var clusterCircle;
+	// console.log(cluster)
+
+	function initialize() {
+
+	  	var mapOptions = {
+	    	zoom: 3,
+	    	center: new google.maps.LatLng(4.642425, -27.551018),
+	    	mapTypeControl: false,
+			panControl: false,
+			scaleControl: false,
+			overviewMapControl: false,
+	    	zoomControl: true,
+	    	zoomControlOptions: {
+	    		style: google.maps.ZoomControlStyle.SMALL
+	    	},
+	    	streetViewControl: false
+	  	};
+		// console.log(mapOptions)
+
+	  	var map = new google.maps.Map(document.getElementById('map-canvas'),
+	      mapOptions);
+
+		// Construct the circle for each value in citymap.
+		for (var c in cluster) {
+			console.log(c)
+			var circleOptions = {
+				strokeColor: '#FF0000',
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: '#FF0000',
+				fillOpacity: 0.35,
+				map: map,
+				center: cluster[c].center,
+				radius: cluster[c].radius * 10
+				// radius: 200000
+			};
+
+			// console.log(populationOptions)
+			// Add the circle to the map.
+			clusterCircle = new google.maps.Circle(circleOptions);
+			var inform = c
+
+			teste(clusterCircle, inform);
+		}
+
+		
+	}
+
+	function teste(clusterCircle, inform) {
+		var infowindow = new google.maps.InfoWindow({
+    		content: inform
+	  	});
+
+		google.maps.event.addListener(clusterCircle, 'click', function() {
+			infowindow.open(clusterCircle['map'], clusterCircle);
+			// console.log(clusterCircle['map'])
+		});
+	}
+	
+
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+  </script>
+
+{% endblock %}
+
 {% block body %}
+
+
   <div class="row">
     <div class="col-md-8">
     	<div id="map-canvas"></div>
     </div>
     <div class="col-md-4">
-    	<form class="" action="/cluster" method="POST">
+    	<form class="" action="/subset" method="POST">
 			<select name="subset" id="subset" onchange="this.form.submit()">
-				{# <option value='null'>- choose a subset -</option> #}
-			  	<option selected="selected" value="S0">Subset 0</option>
+				<option value='null'>- choose a subset -</option>
+			  	{# <option selected="selected" value="S0">Subset 0</option> #}
+			  	<option value="S0">Subset 0</option>
 			  	<option value="S1">Subset 1</option>
 			  	<option value="S2">Subset 2</option>
 			</select>
 		</form>
     </div>
+    
   </div>
   <script type="text/javascript">
-  	$(document).ready(function(){
-	  	var file = {{files | safe}}
-	  	var cluster = {{clusters | safe}}
-
-	  	$.getJSON(file[0], function(json) {
-		    // console.log(json); // this will show the info it in firebug console
-		    console.log(json[0]['text'])
-		});
-	});
+  $('document').ready(function(){
+  	$("#subset option[value='S{{jsonfile}}']").attr('selected', 'selected');
+  });
   </script>
 {% endblock %}
