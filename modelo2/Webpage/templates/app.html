@@ -35,20 +35,36 @@
 	});
 	// console.log(info)
 
+	//create object with position for each tweet
+	var tweet = {};
+	// var num_tweets = data.length;
+	console.log(data.length)
+
+	for (j in data){
+		var logg = data[j]['coordinates']['coordinates'][0];
+		var latt = data[j]['coordinates']['coordinates'][1];
+		var id = data[j]['id_str'];
+
+		tweet[id] = {
+			LatLng: new google.maps.LatLng(latt, logg)
+		}
+	}
+
+
 	var cluster = {};
 	// First, create an object containing LatLng and population for each city.
 	for (i in clusters){
 		var a = clusters[i];
-	  	lat = data[geoinfo[a][0]]['coordinates']['coordinates'][0]
-		log = data[geoinfo[a][0]]['coordinates']['coordinates'][1]
+	  	var log = data[geoinfo[a][0]]['coordinates']['coordinates'][0];
+		var lat = data[geoinfo[a][0]]['coordinates']['coordinates'][1];
 		// console.log(lat);
 		// console.log(log);
 
 		cluster[a] = {
-			center: new google.maps.LatLng(log, lat),
+			center: new google.maps.LatLng(lat, log),
 			radius: geoinfo[a][1]
 		};
-		// console.log(cluster[a].radius)
+		console.log(cluster[a].radius)
 		// console.log(cluster[a].center)
 	}
 	var clusterCircle;
@@ -57,7 +73,7 @@
 	function initialize() {
 
 	  	var mapOptions = {
-	    	zoom: 3,
+	    	zoom: 2,
 	    	center: new google.maps.LatLng(4.642425, -27.551018),
 	    	mapTypeControl: false,
 			panControl: false,
@@ -74,6 +90,18 @@
 	  	var map = new google.maps.Map(document.getElementById('map-canvas'),
 	      mapOptions);
 
+	  	
+	  	//Mark all tweets on map
+	  	var image = 'static/img/point2.png';
+	  	for (t in tweet){
+		  	var beachMarker = new google.maps.Marker({
+		      position: tweet[t].LatLng,
+		      map: map,
+		      icon: image
+		  	});
+	  	}
+		
+
 		// Construct the circle for each value in citymap.
 		for (var c in cluster) {
 			console.log(c)
@@ -85,11 +113,12 @@
 				fillOpacity: 0.35,
 				map: map,
 				center: cluster[c].center,
-				radius: cluster[c].radius * 10
+				radius: parseInt(cluster[c].radius * 100 * (1/Math.log(cluster[c].radius)))
+				// radius: cluster[c].radius * 100
 				// radius: 200000
 			};
 
-			// console.log(populationOptions)
+			console.log(circleOptions)
 			// Add the circle to the map.
 			clusterCircle = new google.maps.Circle(circleOptions);
 			var inform = c
@@ -125,10 +154,11 @@
   <div class="row">
     <div class="col-md-8">
     	<div id="map-canvas"></div>
+    	{# <img id="wait" src="static/img/loader.gif"> #}
     </div>
     <div class="col-md-4">
-    	<form class="" action="/subset" method="POST">
-			<select name="subset" id="subset" onchange="this.form.submit()">
+    	<form id="form" action="/subset" method="POST" onsubmit="loader()" onreset="loader()">
+			<select name="subset" id="subset" onchange="this.form.submit()"> 
 				<option value='null'>- choose a subset -</option>
 			  	{# <option selected="selected" value="S0">Subset 0</option> #}
 			  	<option value="S0">Subset 0</option>
@@ -140,6 +170,7 @@
     
   </div>
   <script type="text/javascript">
+  
   $('document').ready(function(){
   	$("#subset option[value='S{{jsonfile}}']").attr('selected', 'selected');
   });

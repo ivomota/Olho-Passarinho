@@ -67,8 +67,13 @@ def cluster():
 		folders = get_clusters(path)
 		# print folders
 
-		#get all spatial distances 
+		#get matrix spatial distances and transport
 		spatial_data = load_spatial_matrix(req)
+		transp = spatial_data.T
+		l = len(spatial_data)
+		x1 = spatial_data.reshape((l,l))
+		x2 = transp.reshape((l,l))
+		spatial_mat = add(x1, x2)
 
 		clusters = []
 		for folder in folders:
@@ -80,6 +85,7 @@ def cluster():
 		for index, cluster in enumerate(clusters):
 			numbers = read_files(cluster)
 			lst = [int(k) for k in numbers.split(' ')]
+			lst = [l-1 for l in lst]
 			dic['cluster' + str(index)] = lst
 		#print dic
 
@@ -92,28 +98,34 @@ def cluster():
 		# Calc geo center of a cluster
 		# Create a dictionary with name of cluster and the index of centroid and the radius
 		dic2 = {}
-		for cname, indx in dic.iteritems():
+		for cname, indx_list in dic.iteritems():
 			minm = 0
-			clust = 0
-			p = 0
-			maxm = 0
+			center_index = 0
 			radius = 0
 			count = 0
-			for w1 in indx:
+			print cname
+			# indx_list = [i-1 for i in indx_list]
+			# print indx_list
+			for w1 in indx_list:
 				count += 1
 				dist = 0
-				for w2 in indx:
-					if w1 != w2:
-						p = spatial_data[w1-1][w2-1]
-						if p > maxm:
-							maxm = p
-						dist += p
-				if (dist < minm) or (count == 1):
-					minm = dist
-					clust = w1 - 1
+				
+				d = [p for indx, p in enumerate(spatial_mat[w1]) if indx in indx_list and indx != w1 ]
+				# d = [p for p in spatial_mat[w1]]
 
-			radius = (maxm / 2) + 1
-			dic2[str(cname)] = [clust, radius]
+				dist = sum(d)
+
+				if dist < minm or count == 1:
+					minm = dist
+					center_index = w1 - 1
+					radius = max(d)
+					# print "O novo valor minimo e: ", minm
+
+			if radius == 0:
+				radius = 10
+			print "O raio e: ", radius
+
+			dic2[str(cname)] = [center_index, radius]
 		# print dic2
 
 		#Create a json file with theinformation of the name of cluster and index-1
