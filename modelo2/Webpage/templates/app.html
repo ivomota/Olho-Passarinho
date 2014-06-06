@@ -5,16 +5,19 @@
 <script type="text/javascript">
 
   	var jsonfile = 'static/data/S'+{{jsonfile}}+'.json';
-  	var geoinfo = {{geoinfo | safe}}; //0 - Index of tweet; 1 - Radius
+  	// var geoinfo = {{geoinfo | safe}}; //0 - Index of tweet; 1 - Radius
   	var clusters = {{clusters | safe}}
   	// console.log(geoinfo[clusters[0]])
   	
 
-  	//path for json file with index of clusters
-  	var path = 'static/temp/clusters_info.json'
+  	//path for json files
+  	var elements = 'static/temp/clusters_elements.json'
+  	var clusters_info = 'static/temp/clusters_info.json'
 
 	var data = [];
-	var info = []
+	var info = [];
+
+	//Tweets
 	$.ajax({
 	  url: jsonfile,
 	  async: false,
@@ -25,20 +28,33 @@
 	});
 	// console.log(data)
 
+	//List with index of each element in clusters
 	$.ajax({
-	  url: path,
+	  url: elements,
 	  async: false,
 	  dataType: 'json',
 	  success: function (json) {
-	    info = json;
+	    lst_tweets = json;
 	  }
 	});
 	// console.log(info)
 
+	//List with index of each element in clusters
+	$.ajax({
+	  url: clusters_info,
+	  async: false,
+	  dataType: 'json',
+	  success: function (json) {
+	    geoinfo = json;
+	  }
+	});
+	// console.log(geoinfo)
+
+
 	//create object with position for each tweet
 	var tweet = {};
 	// var num_tweets = data.length;
-	console.log(data.length)
+	// console.log(data.length)
 
 	for (j in data){
 		var logg = data[j]['coordinates']['coordinates'][0];
@@ -55,14 +71,15 @@
 	// First, create an object containing LatLng and population for each city.
 	for (i in clusters){
 		var a = clusters[i];
-	  	var log = data[geoinfo[a][0]]['coordinates']['coordinates'][0];
-		var lat = data[geoinfo[a][0]]['coordinates']['coordinates'][1];
+		console.log(geoinfo[a]['center_index'])
+	  	var log = data[geoinfo[a]['center_index']]['coordinates']['coordinates'][0];
+		var lat = data[geoinfo[a]['center_index']]['coordinates']['coordinates'][1];
 		// console.log(lat);
 		// console.log(log);
 
 		cluster[a] = {
 			center: new google.maps.LatLng(lat, log),
-			radius: geoinfo[a][1]
+			radius: geoinfo[a]['radius']
 		};
 		console.log(cluster[a].radius)
 		// console.log(cluster[a].center)
@@ -90,8 +107,33 @@
 	  	var map = new google.maps.Map(document.getElementById('map-canvas'),
 	      mapOptions);
 
-	  	
-	  	//Mark all tweets on map
+		// Construct the circle for each value in citymap.
+		for (var c in cluster) {
+			console.log(c)
+			var circleOptions = {
+				// strokeColor: '#FF0000',
+				strokeColor: '#800000',
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: '#FF0000',
+				fillOpacity: 0.35,
+				map: map,
+				position: cluster[c].center,
+				center: cluster[c].center,
+				// radius: parseInt(cluster[c].radius * 500 * (1/Math.log(cluster[c].radius)))
+				radius: cluster[c].radius * 1000 * (1/(Math.log(cluster[c].radius)))
+			};
+
+			// console.log(circleOptions)
+			// Add the circle to the map.
+			clusterCircle = new google.maps.Circle(circleOptions);
+			var inform = c
+			// var txt = 
+
+			teste(clusterCircle, inform);
+		}
+
+		//Mark all tweets on map
 	  	var image = 'static/img/point2.png';
 	  	for (t in tweet){
 		  	var beachMarker = new google.maps.Marker({
@@ -101,46 +143,24 @@
 		  	});
 	  	}
 		
-
-		// Construct the circle for each value in citymap.
-		for (var c in cluster) {
-			console.log(c)
-			var circleOptions = {
-				strokeColor: '#FF0000',
-				strokeOpacity: 0.8,
-				strokeWeight: 2,
-				fillColor: '#FF0000',
-				fillOpacity: 0.35,
-				map: map,
-				center: cluster[c].center,
-				radius: parseInt(cluster[c].radius * 100 * (1/Math.log(cluster[c].radius)))
-				// radius: cluster[c].radius * 100
-				// radius: 200000
-			};
-
-			console.log(circleOptions)
-			// Add the circle to the map.
-			clusterCircle = new google.maps.Circle(circleOptions);
-			var inform = c
-
-			teste(clusterCircle, inform);
-		}
-
-		
 	}
 
-	function teste(clusterCircle, inform) {
+  	function teste(clusterCircle, inform) {
 		var infowindow = new google.maps.InfoWindow({
-    		content: inform
-	  	});
+			  content: inform
+	 	});
 
 		google.maps.event.addListener(clusterCircle, 'click', function() {
 			infowindow.open(clusterCircle['map'], clusterCircle);
-			// console.log(clusterCircle['map'])
+			console.log(inform.split());
+			$('#clusterinfo').append('<h4 class="name" >'+ inform + '</h4>')
+			if ($('#clusterinfo h4').length > 1){
+				$('#clusterinfo').find(':first-child').remove();
+			}
+
 		});
 	}
 	
-
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -154,10 +174,10 @@
   <div class="row">
     <div class="col-md-8">
     	<div id="map-canvas"></div>
-    	{# <img id="wait" src="static/img/loader.gif"> #}
+    	<div id="load"></div>
     </div>
     <div class="col-md-4">
-    	<form id="form" action="/subset" method="POST" onsubmit="loader()" onreset="loader()">
+    	<form id="form" action="/subset" method="POST" onreset="loader()">
 			<select name="subset" id="subset" onchange="this.form.submit()"> 
 				<option value='null'>- choose a subset -</option>
 			  	{# <option selected="selected" value="S0">Subset 0</option> #}
@@ -166,6 +186,7 @@
 			  	<option value="S2">Subset 2</option>
 			</select>
 		</form>
+		<div id="clusterinfo"></div>
     </div>
     
   </div>
@@ -173,6 +194,7 @@
   
   $('document').ready(function(){
   	$("#subset option[value='S{{jsonfile}}']").attr('selected', 'selected');
+
   });
   </script>
 {% endblock %}

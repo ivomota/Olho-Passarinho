@@ -22,7 +22,7 @@ def hf(long1, lat1, long2, lat2):
   	a = sin(delta_lat/2) ** 2 + cos(lat1) * cos(lat2) * sin(delta_long/2)**2
 	c = 2 * arcsin(min(1,sqrt(a)))
 	d = R * c
-  	return d # Distance in k
+  	return d # Distance in km
 
 def deg2rad(deg):
 	return (deg*pi/180)
