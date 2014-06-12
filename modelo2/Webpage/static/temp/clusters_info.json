@@ -1,34 +1,50 @@
 {
     "cluster0": {
         "center_index": "933",
-        "radius": "18458"
+        "end_date": "Tue Jun 18 21:58:15 +0000 2013",
+        "radius": "18458",
+        "start_date": "Mon Jun 17 23:05:30 +0000 2013"
     },
     "cluster1": {
         "center_index": "342",
-        "radius": "3303"
+        "end_date": "Tue Jun 18 22:00:22 +0000 2013",
+        "radius": "3303",
+        "start_date": "Mon Jun 17 23:01:07 +0000 2013"
     },
     "cluster2": {
         "center_index": "18",
-        "radius": "1585"
+        "end_date": "Tue Jun 18 21:56:47 +0000 2013",
+        "radius": "1585",
+        "start_date": "Tue Jun 18 13:55:20 +0000 2013"
     },
     "cluster3": {
         "center_index": "22",
-        "radius": "713"
+        "end_date": "Tue Jun 18 09:41:25 +0000 2013",
+        "radius": "713",
+        "start_date": "Tue Jun 18 05:52:59 +0000 2013"
     },
     "cluster4": {
         "center_index": "95",
-        "radius": "1988"
+        "end_date": "Tue Jun 18 21:57:27 +0000 2013",
+        "radius": "1988",
+        "start_date": "Tue Jun 18 21:20:18 +0000 2013"
     },
     "cluster5": {
         "center_index": "192",
-        "radius": "100"
+        "end_date": "Tue Jun 18 10:31:21 +0000 2013",
+        "radius": "100",
+        "start_date": "Tue Jun 18 10:15:48 +0000 2013"
     },
     "cluster6": {
         "center_index": "430",
-        "radius": "3956"
+        "end_date": "Tue Jun 18 08:22:45 +0000 2013",
+        "radius": "3956",
+        "start_date": "Mon Jun 17 23:34:10 +0000 2013"
     },
     "cluster7": {
         "center_index": "1968",
-        "radius": "1406"
+        "end_date": "Tue Jun 18 08:45:29 +0000 2013",
+        "radius": "1406",
+        "start_date": "Mon Jun 17 23:13:25 +0000 2013"
     }
 }

@@ -5,6 +5,10 @@ from numpy import *
 import pickle
 import math
 
+## Temporary
+from datetime import datetime
+from dateutil import parser
+##
 
 def get_clusters(path):
     """    Returns a list of folders for 
@@ -42,6 +46,10 @@ def write_file(data, filename):
 	f = open(path, 'w')
 	f.write(str(s))
 	f.close()
+
+def sort_by_creation(d):
+    '''a helper function for sorting'''
+    return d['created_at']
 
 #Start Script
 sub = 'S0'
@@ -105,8 +113,19 @@ for cname, indx_list in dic.iteritems():
 		radius = 100
 	print "O raio e: ", radius
 
-	dic2[cname] = {"center_index": str(center_index), "radius":str(radius)}
-print dic2
+	data_c = [j for ind, j in enumerate(json) if ind in indx_list]
+	
+	print data_c[0]['created_at']
+	sorted_data = sorted(data_c, key=sort_by_creation)
+	print sorted_data[0]['created_at']
+
+
+
+	start_date = sorted_data[0]['created_at']
+	end_date = sorted_data[-1]['created_at']
+
+	dic2[cname] = {"center_index": str(center_index), "radius":str(radius), "start_date": start_date, "end_date": end_date}
+# print dic2
 
 #Create a json file with theinformation of the name of cluster and index-1
 write_file(dic, "clusters_elements")

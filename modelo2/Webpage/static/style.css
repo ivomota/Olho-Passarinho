@@ -13,3 +13,13 @@ div.invisible{
 	padding: 0px;
 	min-height: 400px;
 }
+
+#imgview{
+	margin-top: 20px;
+}
+
+.img{
+	width: 30%;
+	margin: -2px;
+	padding: 0px;
+}

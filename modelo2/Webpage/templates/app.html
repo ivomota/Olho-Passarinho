@@ -4,7 +4,9 @@
 
 <script type="text/javascript">
 
-  	var jsonfile = 'static/data/S'+{{jsonfile}}+'.json';
+	if ({{jsonfile}} == 0 || {{jsonfile}} == 1 || {{jsonfile}} == 2) {
+  		var jsonfile = 'static/data/S'+{{jsonfile}}+'.json';
+	}
   	// var geoinfo = {{geoinfo | safe}}; //0 - Index of tweet; 1 - Radius
   	var clusters = {{clusters | safe}}
   	// console.log(geoinfo[clusters[0]])
@@ -50,7 +52,6 @@
 	});
 	// console.log(geoinfo)
 
-
 	//create object with position for each tweet
 	var tweet = {};
 	// var num_tweets = data.length;
@@ -66,7 +67,6 @@
 		}
 	}
 
-
 	var cluster = {};
 	// First, create an object containing LatLng and population for each city.
 	for (i in clusters){
@@ -79,13 +79,14 @@
 
 		cluster[a] = {
 			center: new google.maps.LatLng(lat, log),
-			radius: geoinfo[a]['radius']
+			radius: geoinfo[a]['radius'],
+			start : geoinfo[a]['start_date'],
+			end: geoinfo[a]['end_date']
 		};
 		console.log(cluster[a].radius)
 		// console.log(cluster[a].center)
 	}
 	var clusterCircle;
-	// console.log(cluster)
 
 	function initialize() {
 
@@ -127,10 +128,14 @@
 			// console.log(circleOptions)
 			// Add the circle to the map.
 			clusterCircle = new google.maps.Circle(circleOptions);
-			var inform = c
-			// var txt = 
+			var inform = c ;
+			var start = cluster[c].start;
+			var end = cluster[c].end;
+	
+			//lista com index dos tweets do cluster
+			var tweet_indexs = lst_tweets[c];
 
-			teste(clusterCircle, inform);
+			teste(clusterCircle, inform, start, end, tweet_indexs);
 		}
 
 		//Mark all tweets on map
@@ -142,10 +147,9 @@
 		      icon: image
 		  	});
 	  	}
-		
 	}
 
-  	function teste(clusterCircle, inform) {
+  	function teste(clusterCircle, inform, start, end, tweet_indexs) {
 		var infowindow = new google.maps.InfoWindow({
 			  content: inform
 	 	});
@@ -153,17 +157,110 @@
 		google.maps.event.addListener(clusterCircle, 'click', function() {
 			infowindow.open(clusterCircle['map'], clusterCircle);
 			console.log(inform.split());
-			$('#clusterinfo').append('<h4 class="name" >'+ inform + '</h4>')
-			if ($('#clusterinfo h4').length > 1){
-				$('#clusterinfo').find(':first-child').remove();
+			$('#clusterinfo').append('<h4 class="info" >'+ inform + '</h4>');
+			$('#clusterinfo').append('<p class="info">'+ start + '</p>');
+			$('#clusterinfo').append('<p class="info">'+ end + '</p>');
+
+			if ($('#clusterinfo').children().length > 3){
+				$('#clusterinfo .info:lt(3)').remove();
 			}
+
+			////
+			//// Processo de seleção das fotografias
+			////
+			var arr = [];
+			//escolhidos aleatoriamente 9 index do cluster
+			if(tweet_indexs.length >= 9){
+				for (var i=0; i<9; i++){
+					arr.push(tweet_indexs[Math.floor(Math.random() * tweet_indexs.length)])
+				}
+			}
+			else{
+				for (var i=0; i<4; i++){
+					arr.push(tweet_indexs[Math.floor(Math.random() * tweet_indexs.length)])
+				}
+			}
+			
+			// console.log(arr);
+			if ($('#images').children().length == 9){
+				$('#images .img:lt(9)').remove();
+			}
+			if ($('#images').children().length == 4 ){
+				$('#images .img:lt(4)').remove();
+			}
+			
+			for (var j = 0; j < arr.length; j++){
+				$('#images').append(
+					'<img class="img" src="static/img/'+ data[arr[j]]['id_str'] +'.jpeg">'
+					);
+			}
+
+
+			////
+			//// Fim processo
+			////
 
 		});
 	}
-	
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 
+	//
+	// TIMELINE CODE
+	//
+  	google.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+
+
+		var container = document.getElementById('timeline');
+		var chart = new google.visualization.Timeline(container);
+		var dataTable = new google.visualization.DataTable();
+		dataTable.addColumn({ type: 'string', id: 'Term' });
+		dataTable.addColumn({ type: 'string', id: 'Name' });
+		dataTable.addColumn({ type: 'date', id: 'Start' });
+		dataTable.addColumn({ type: 'date', id: 'End' });
+		j = 0
+		for (var name in cluster) {
+			
+			var s = cluster[name].start ;
+			var s_year = parseInt(s.split(" ")[5]);
+			var s_month = s.split(" ")[1];
+			s_month = ( "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(s_month) / 3 + 1 );
+			var s_day = parseInt(s.split(" ")[2]);
+			var date_hour = s.split(" ")[3];
+			var s_hour = parseInt(date_hour.split(":")[0]);
+			var s_min = parseInt(date_hour.split(":")[1]);
+			var s_seg = parseInt(date_hour.split(":")[2]);
+
+			// console.log(s.split(" "))
+			// console.log(s_year, s_month, s_day)
+
+			var e = cluster[name].end;
+			var e_year = parseInt(e.split(" ")[5]);
+			var e_month = e.split(" ")[1];
+			e_month = ( "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(e_month) / 3 + 1 );;
+			var e_day = parseInt(e.split(" ")[2]);
+			var date_hour = e.split(" ")[3];
+			var e_hour = parseInt(date_hour.split(":")[0]);
+			var e_min = parseInt(date_hour.split(":")[1]);
+			var e_seg = parseInt(date_hour.split(":")[2]);
+
+			j += 1;
+			dataTable.addRows([
+				[ '1' , name, new Date(s_year, s_month, s_day, s_hour, s_min, s_seg), new Date(e_year, e_month, e_day, e_hour, e_min, e_seg) ]
+			// [ '1', 'George Washington', new Date(1789, 3, 29), new Date(1797, 2, 3) ],
+			// [ '2', 'John Adams',        new Date(1797, 2, 3),  new Date(1801, 2, 3) ],
+			// [ '3', 'Thomas Jefferson',  new Date(1801, 2, 3),  new Date(1809, 2, 3) ]
+				]);
+			}
+
+		var options = {
+		timeline: { showRowLabels: false }
+		};
+
+		chart.draw(dataTable, options);
+	}
   </script>
 
 {% endblock %}
@@ -175,6 +272,8 @@
     <div class="col-md-8">
     	<div id="map-canvas"></div>
     	<div id="load"></div>
+    	<br>
+    	<div id="timeline" style="width: 100%; height: 380px;"></div>
     </div>
     <div class="col-md-4">
     	<form id="form" action="/subset" method="POST" onreset="loader()">
@@ -187,6 +286,26 @@
 			</select>
 		</form>
 		<div id="clusterinfo"></div>
+		<div id="imgview">
+			<div class="row">
+				<div id="images" class="col-md-12">
+			{# 		<img class="img" src="static/img/black-square.jpg">
+					<img class="img" src="static/img/black-square.jpg">
+					<img class="img" src="static/img/black-square.jpg">
+				</div>
+				<div class="col-md-12"> 
+					<img class="img" src="static/img/black-square.jpg">
+					<img class="img" src="static/img/black-square.jpg">
+					<img class="img" src="static/img/black-square.jpg">
+				</div>
+				<div class="col-md-12">
+					<img class="img" src="static/img/black-square.jpg">
+					<img class="img" src="static/img/black-square.jpg">
+					<img class="img" src="static/img/black-square.jpg"> #}
+				</div>
+			</div>
+		</div>
+	</div>
     </div>
     
   </div>
