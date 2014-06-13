@@ -16,19 +16,18 @@
 
     <!-- Files -->
     <link rel="stylesheet" type="text/css" href="static/style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     {# // <script type="text/javascript" src="static/map.js"></script> #}
     <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
        'version':'1','packages':['timeline']}]}"></script>
+    <script type="text/javascript">
+      $(window).load(function(){
+        // $('#load').fadeOut(2000);
 
+      });
+    </script>
     {% block script %}{% endblock %}
 
-    <script type="text/javascript">
-    function loader(){
-      console.log('porreiro');
-      $('#load').append('<img id="wait" src="static/img/loader.gif">');
-      $('#map-canvas').hide();
-    }
-  </script>
   </head>
   <body>
     <div class="jumbotron head">

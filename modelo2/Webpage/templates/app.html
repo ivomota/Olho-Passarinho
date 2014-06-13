@@ -6,15 +6,14 @@
 
 	if ({{jsonfile}} == 0 || {{jsonfile}} == 1 || {{jsonfile}} == 2) {
   		var jsonfile = 'static/data/S'+{{jsonfile}}+'.json';
+  		  	//path for json files
+  		var elements = 'static/temp/clusters_elements_S'+{{jsonfile}}+'.json'
+  		var clusters_info = 'static/temp/clusters_info_S'+{{jsonfile}}+'.json'
 	}
-  	// var geoinfo = {{geoinfo | safe}}; //0 - Index of tweet; 1 - Radius
+
   	var clusters = {{clusters | safe}}
   	// console.log(geoinfo[clusters[0]])
-  	
 
-  	//path for json files
-  	var elements = 'static/temp/clusters_elements.json'
-  	var clusters_info = 'static/temp/clusters_info.json'
 
 	var data = [];
 	var info = [];
@@ -147,6 +146,7 @@
 		      icon: image
 		  	});
 	  	}
+
 	}
 
   	function teste(clusterCircle, inform, start, end, tweet_indexs) {
@@ -156,13 +156,21 @@
 
 		google.maps.event.addListener(clusterCircle, 'click', function() {
 			infowindow.open(clusterCircle['map'], clusterCircle);
-			console.log(inform.split());
-			$('#clusterinfo').append('<h4 class="info" >'+ inform + '</h4>');
-			$('#clusterinfo').append('<p class="info">'+ start + '</p>');
-			$('#clusterinfo').append('<p class="info">'+ end + '</p>');
+			// console.log(inform.split());
 
-			if ($('#clusterinfo').children().length > 3){
-				$('#clusterinfo .info:lt(3)').remove();
+			///
+			///Info cluster
+			///
+			$('div #rightinfo').addClass('highlight');
+			var arr_chars = inform.split("")
+			var last_element = arr_chars[arr_chars.length - 1];			
+			$('#clusterinfo').append('<h4 class="info" >Cluster '+ last_element +'</h4>');
+			$('#clusterinfo').append('<p class="info"><b>Informação temporal:</b> </p>');
+			$('#clusterinfo').append('<p class="info"><b>Início:</b> '+ start + '</p>');
+			$('#clusterinfo').append('<p class="info"><b>Fim:</b> '+ end + '</p>');
+
+			if ($('#clusterinfo').children().length > 4){
+				$('#clusterinfo .info:lt(4)').remove();
 			}
 
 			////
@@ -188,20 +196,56 @@
 			if ($('#images').children().length == 4 ){
 				$('#images .img:lt(4)').remove();
 			}
-			
+
 			for (var j = 0; j < arr.length; j++){
+				var id_tw = data[arr[j]]['id_str'];
 				$('#images').append(
-					'<img class="img" src="static/img/'+ data[arr[j]]['id_str'] +'.jpeg">'
+
+					'<img id="'+id_tw+'" class="img" src="static/img/'+id_tw+'.jpeg">'
 					);
 			}
-
-
+			show_image();
 			////
 			//// Fim processo
 			////
 
+
+
 		});
 	}
+		
+	function show_image (){
+		//interaction images
+		var images = $('#images');
+		var image = $('#images > img');
+		var current = -1;
+		var focus = $('.focus');
+		var close = $('.close');
+		var container = $('.focus .container_view');
+		console.log('porreiro')
+
+		image.on('click', function() {
+	        // current = $('img').index($(this));
+	        current = $(this).attr('src');
+	        console.log(current);
+	        container.empty();
+	        container.append('<img src='+ current +'/>');
+	        focus.fadeIn().addClass('enabled');
+	        images.addClass('darken');
+	        images.append('<div class="overlay"></div>');
+	        // $('html, body').animate({
+	        //     scrollTop: focus.offset().top - 50
+	        // }, 500);
+			console.log('clikei')
+	    });
+
+	    close.on('click', function() {
+	        focus.css('display', 'none').removeClass('enabled');
+	        images.removeClass('darken');
+	        $('.overlay').remove();
+	    });
+	}
+
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -257,26 +301,29 @@
 
 		var options = {
 		timeline: { showRowLabels: false }
+
 		};
 
 		chart.draw(dataTable, options);
+
 	}
+
   </script>
 
 {% endblock %}
 
 {% block body %}
-
-
-  <div class="row">
+{# <div id="load">
+	<img src="static/img/loader.gif">
+</div> #}
+<div class="row">
     <div class="col-md-8">
     	<div id="map-canvas"></div>
-    	<div id="load"></div>
     	<br>
-    	<div id="timeline" style="width: 100%; height: 380px;"></div>
+    	<div id="timeline"></div>
     </div>
     <div class="col-md-4">
-    	<form id="form" action="/subset" method="POST" onreset="loader()">
+    	<form id="form" action="/subset" method="POST">
 			<select name="subset" id="subset" onchange="this.form.submit()"> 
 				<option value='null'>- choose a subset -</option>
 			  	{# <option selected="selected" value="S0">Subset 0</option> #}
@@ -285,33 +332,31 @@
 			  	<option value="S2">Subset 2</option>
 			</select>
 		</form>
-		<div id="clusterinfo"></div>
-		<div id="imgview">
-			<div class="row">
-				<div id="images" class="col-md-12">
-			{# 		<img class="img" src="static/img/black-square.jpg">
-					<img class="img" src="static/img/black-square.jpg">
-					<img class="img" src="static/img/black-square.jpg">
-				</div>
-				<div class="col-md-12"> 
-					<img class="img" src="static/img/black-square.jpg">
-					<img class="img" src="static/img/black-square.jpg">
-					<img class="img" src="static/img/black-square.jpg">
-				</div>
-				<div class="col-md-12">
-					<img class="img" src="static/img/black-square.jpg">
-					<img class="img" src="static/img/black-square.jpg">
-					<img class="img" src="static/img/black-square.jpg"> #}
+		<div id="rightinfo">
+			<div id="clusterinfo"></div>
+			<div id="imgview">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="images"></div>
+						{# add images grid #}
+						<div class="focus">
+							<div class="controls"> <i class="close fa fa-times-circle"></i></div>
+							<div class="container_view"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-    </div>
+</div>
     
   </div>
   <script type="text/javascript">
   
   $('document').ready(function(){
+
+    
+
   	$("#subset option[value='S{{jsonfile}}']").attr('selected', 'selected');
 
   });

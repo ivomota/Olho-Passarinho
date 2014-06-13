@@ -2,6 +2,21 @@
 
 {% block error %}
 
-<h2>You need to chosse a subset</h2>
+<div class="row">
+    <div class="col-md-8">
+    	<h2>You need to chosse a subset</h2>
+    </div>
+    <div class="col-md-4">
+    	<form id="form" action="/subset" method="POST">
+			<select name="subset" id="subset" onchange="this.form.submit()"> 
+				<option value='null'>- choose a subset -</option>
+			  	{# <option selected="selected" value="S0">Subset 0</option> #}
+			  	<option value="S0">Subset 0</option>
+			  	<option value="S1">Subset 1</option>
+			  	<option value="S2">Subset 2</option>
+			</select>
+		</form>
+	</div>
+
 
 {% endblock %}
