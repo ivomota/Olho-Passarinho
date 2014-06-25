@@ -40,6 +40,12 @@ def start():
 @app.route('/subset', methods= ['GET', 'POST'])
 def cluster():
 	req = request.form['subset']
+	pimg = request.form['pesoimg']
+	pesp = request.form['pesoesp']
+	ptmp = request.form['pesotemp']
+
+	print pimg, pesp, ptmp
+
 	if req == "null":
 		return render_template('test.html')
 	else:
@@ -49,8 +55,10 @@ def cluster():
 
 		clusters = []
 		for folder in folders:
-			if folder == "static/clusters/"+ str(req) +"/c_0.5_0.25_0.25":
+			# if folder == "static/clusters/"+ str(req) +"/c_0.5_0.25_0.25":
+			if folder == "static/clusters/"+ str(req) +'/c_'+str(pimg)+'_'+str(pesp)+'_'+str(ptmp):
 				clusters = get_clusters(folder)
+				print folder
 
 		# Create dictionary with name of cluster and index of tweet
 		dic = {}

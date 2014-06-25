@@ -49,6 +49,11 @@
 	padding: 0px;
 }
 
+.shuffle{
+  margin-top: 5%;
+  float: right;
+}
+
 .highlight {
 padding: 9px 14px;
 margin-bottom: 14px;
@@ -62,6 +67,7 @@ margin-top: 20px;
 img{
 	cursor: pointer;
 }
+
 
 .focus {
     z-index: 10;
@@ -82,6 +88,7 @@ img{
 .focus.enabled .container_view {
     width: 100%;
     height: 100%;
+    margin-top: -20px;
 }
 
 .focus.enabled img {
@@ -100,7 +107,7 @@ img{
 	cursor: pointer;
 	font-size: 30px;
 	margin-left: 95%;
-	margin-top: -5%;
+	margin-top: -15%;
 	opacity: 0.8;
 }
 
@@ -121,3 +128,26 @@ img{
     opacity: 0.3;
 }
 
+.whiteblock {
+  height: 60%;
+  /*margin-top: 10px;*/
+  background-color: white;
+  border-top: 3px solid rgb(54, 54, 54);;
+}
+
+.info_tweet{
+  padding: 5px;
+}
+
+.tweet_text{
+  font-size: 8pt;
+}
+
+.butt{
+  
+}
+
+.tweet_btn{
+  margin-top: 10px;
+  margin-left: 16%;
+}

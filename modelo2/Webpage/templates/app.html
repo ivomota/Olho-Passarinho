@@ -14,7 +14,6 @@
   	var clusters = {{clusters | safe}}
   	// console.log(geoinfo[clusters[0]])
 
-
 	var data = [];
 	var info = [];
 
@@ -121,7 +120,7 @@
 				position: cluster[c].center,
 				center: cluster[c].center,
 				// radius: parseInt(cluster[c].radius * 500 * (1/Math.log(cluster[c].radius)))
-				radius: cluster[c].radius * 1000 * (1/(Math.log(cluster[c].radius)))
+				radius: cluster[c].radius * 3000 * (1/(1.5 * Math.log(cluster[c].radius)))
 			};
 
 			// console.log(circleOptions)
@@ -134,7 +133,7 @@
 			//lista com index dos tweets do cluster
 			var tweet_indexs = lst_tweets[c];
 
-			teste(clusterCircle, inform, start, end, tweet_indexs);
+			inf(clusterCircle, inform, start, end, tweet_indexs);
 		}
 
 		//Mark all tweets on map
@@ -149,7 +148,7 @@
 
 	}
 
-  	function teste(clusterCircle, inform, start, end, tweet_indexs) {
+  	function inf(clusterCircle, inform, start, end, tweet_indexs) {
 		var infowindow = new google.maps.InfoWindow({
 			  content: inform
 	 	});
@@ -179,13 +178,38 @@
 			var arr = [];
 			//escolhidos aleatoriamente 9 index do cluster
 			if(tweet_indexs.length >= 9){
-				for (var i=0; i<9; i++){
-					arr.push(tweet_indexs[Math.floor(Math.random() * tweet_indexs.length)])
+				var c = Math.floor(Math.random() * tweet_indexs.length);
+				arr.push(tweet_indexs[c])
+				for (var i=0; i<8; i++){
+					notvalid = true;				
+					while (notvalid){
+						var c = Math.floor(Math.random() * tweet_indexs.length);
+						if (arr.indexOf(tweet_indexs[c]) == -1) {
+							notvalid = false;
+							console.log("entrei");
+						} 
+					}
+					arr.push(tweet_indexs[c]);
+					// arr.push(tweet_indexs[Math.floor(Math.random() * tweet_indexs.length)])
 				}
 			}
 			else{
+				var c = Math.floor(Math.random() * tweet_indexs.length);
+				arr.push(tweet_indexs[c])
 				for (var i=0; i<4; i++){
-					arr.push(tweet_indexs[Math.floor(Math.random() * tweet_indexs.length)])
+					notvalid = true;
+					while (notvalid){
+						var c = Math.floor(Math.random() * tweet_indexs.length);
+						// console.log(tweet_indexs[c])
+						// console.log(arr)
+
+						if (arr.indexOf(tweet_indexs[c]) == -1) {
+							console.log("entrei");
+							notvalid = false;
+						} 
+					}
+					arr.push(tweet_indexs[c]);
+					// arr.push(tweet_indexs[Math.floor(Math.random() * tweet_indexs.length)])
 				}
 			}
 			
@@ -193,8 +217,8 @@
 			if ($('#images').children().length == 9){
 				$('#images .img:lt(9)').remove();
 			}
-			if ($('#images').children().length == 4 ){
-				$('#images .img:lt(4)').remove();
+			if ($('#images').children().length == 5){
+				$('#images .img:lt(5)').remove();
 			}
 
 			for (var j = 0; j < arr.length; j++){
@@ -204,6 +228,9 @@
 					'<img id="'+id_tw+'" class="img" src="static/img/'+id_tw+'.jpeg">'
 					);
 			}
+
+			// $('#images').append('<button type="button" class="btn btn-danger shuffle">Ver outras</button>');
+
 			show_image();
 			////
 			//// Fim processo
@@ -222,6 +249,7 @@
 		var focus = $('.focus');
 		var close = $('.close');
 		var container = $('.focus .container_view');
+		
 		console.log('porreiro')
 
 		image.on('click', function() {
@@ -229,7 +257,7 @@
 	        current = $(this).attr('src');
 	        console.log(current);
 	        container.empty();
-	        container.append('<img src='+ current +'/>');
+	        container.append('<img src='+ current +'/><div class="whiteblock"></div>');
 	        focus.fadeIn().addClass('enabled');
 	        images.addClass('darken');
 	        images.append('<div class="overlay"></div>');
@@ -237,12 +265,24 @@
 	        //     scrollTop: focus.offset().top - 50
 	        // }, 500);
 			console.log('clikei')
+
+			var text = $('.whiteblock');
+			var id_s = current.split('/')[2].split('.')[0];
+			for (var y = 0; y < data.length; y++){
+				if (data[y]['id_str'] == String(id_s) ){
+					indx = y;
+					break; 
+				}
+			}
+			text.append('<div class="info_tweet"><p class="tweet_user"><b>'+data[indx]['user']['name']+'</b></p><p class="tweet_text">'+data[indx]['text']+'</p><a class="butt" href="https://twitter.com/statuses/'+id_s+'"><button type="button" class="btn btn-primary tweet_btn">Ir para tweet original</button></a></div>');
+
 	    });
 
 	    close.on('click', function() {
 	        focus.css('display', 'none').removeClass('enabled');
 	        images.removeClass('darken');
 	        $('.overlay').remove();
+	        $('.info_tweet').remove();
 	    });
 	}
 
@@ -308,6 +348,8 @@
 
 	}
 
+	  
+
   </script>
 
 {% endblock %}
@@ -325,23 +367,58 @@
     <div class="col-md-4">
     	<form id="form" action="/subset" method="POST">
 			<select name="subset" id="subset" onchange="this.form.submit()"> 
-				<option value='null'>- choose a subset -</option>
+				<option value='null'>- escolhe um conjunto-</option>
 			  	{# <option selected="selected" value="S0">Subset 0</option> #}
-			  	<option value="S0">Subset 0</option>
-			  	<option value="S1">Subset 1</option>
-			  	<option value="S2">Subset 2</option>
+			  	<option value="S0">17 a 18 de Junho 2013</option>
+			  	<option value="S1">18 a 19 de Junho 2013</option>
+			  	<option value="S2">17 a 19 de Junho 2013</option>
 			</select>
+			<br>
+			<br>
+			  <label for="pesoimg">Peso para imagem</label>
+			  <select name="pesoimg" id="pesoimg">
+			    <option value="0">0</option>
+			    <option value="0.25">0.25</option>
+			    <option value="0.5">0.5</option>
+			    <option value="0.75">0.75</option>
+			    <option value="1">1</option>
+			  </select>
+			<br>
+			  <label for="pesoesp">Peso para espaço</label>
+			  <select name="pesoesp" id="pesoesp">
+			    <option value="0">0</option>
+			    <option value="0.25">0.25</option>
+			    <option value="0.5">0.5</option>
+			    <option value="0.75">0.75</option>
+			    <option value="1">1</option>
+			  </select>
+			<br>
+			  <label for="pesotemp">Peso para tempo</label>
+			  <select name="pesotemp" id="pesotemp">
+			    <option value="0">0</option>
+			    <option value="0.25">0.25</option>
+			    <option value="0.5">0.5</option>
+			    <option value="0.75">0.75</option>
+			    <option value="1">1</option>
+			  </select>
+			  <br>
+			<input type="submit" onclick="this.form.submit()" id="total" value="Submit">
+			{# <input type="submit" onclick="update()" id="total" value="Submit"> #}
 		</form>
+
+
 		<div id="rightinfo">
 			<div id="clusterinfo"></div>
 			<div id="imgview">
 				<div class="row">
 					<div class="col-md-12">
 						<div id="images"></div>
+						{# <div></div> #}
 						{# add images grid #}
 						<div class="focus">
 							<div class="controls"> <i class="close fa fa-times-circle"></i></div>
 							<div class="container_view"></div>
+							
 						</div>
 					</div>
 				</div>
@@ -351,6 +428,13 @@
 </div>
     
   </div>
+  <script type="text/javascript">
+	  $('#pesoimg').change(function(){
+	  	
+	  	console.log("Boa");
+	  });
+
+  </script>
   <script type="text/javascript">
   
   $('document').ready(function(){
