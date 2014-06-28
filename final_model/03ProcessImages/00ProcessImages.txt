@@ -1,0 +1,45 @@
+Modelo 1
+
+Este modelo está dividido em 4 partes:
+
+	- Criação ficheiros com descritores SIFT 
+		Ficheiro
+			- init.py
+		Dependências
+			- sift.py
+			- imtools.py
+
+	- Criação do vocabulário visual atavés dos descritores 
+		Ficheiro
+			- create_vocabulary.py
+		Dependências
+			- vocabulary.py
+			- sift.py
+			- imtools.py
+	
+	- Criação de uam base de dados para indexação do vocabulário à imagens
+		Ficheiro
+			- create_database.py
+		Dependências
+			- imagesearch.py
+			- sift.py
+			- imtools.py
+	
+	- Calculo e criação da matriz distancias entre histogramas do vocubulario de cada imagem
+		Ficheiro
+			- matrix_distance.py
+		Dependências
+			- imagesearch.py
+			- sift.py
+			- imtools.py
+			- vocabulary.py
+
+	- Apresentação da lista de imagens por clusters
+		Ficheiro
+			- clustering.py
+		Dependências
+			- imtools.py
+
+Base de dados: data.db
+	- O esquema desta base de dados pode ser vista no ficheiro
+		- database_schema.txt
